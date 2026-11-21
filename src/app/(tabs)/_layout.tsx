@@ -1,17 +1,19 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Redirect } from 'expo-router';
-import { Tabs } from 'expo-router/js-tabs';
+import { BottomTabBar, Tabs } from 'expo-router/js-tabs';
 import { useEffect, type ComponentProps } from 'react';
 import { AppState } from 'react-native';
 
+import { MiniPlayer } from '@/components/player/MiniPlayer';
 import { onMediaLibraryChange } from '@/library/scanner';
+import { restorePlayback } from '@/player/player';
 import { useLibrary } from '@/store/library';
 import { sizes, useTheme } from '@/theme';
 
 type IconName = ComponentProps<typeof MaterialIcons>['name'];
 
 const tabs: { name: string; title: string; icon: IconName }[] = [
-  { name: 'index', title: 'Biblioteca', icon: 'library-music' },
+  { name: '(biblioteca)', title: 'Biblioteca', icon: 'library-music' },
   { name: 'buscar', title: 'Buscar', icon: 'search' },
   { name: 'listas', title: 'Listas', icon: 'queue-music' },
   { name: 'ajustes', title: 'Ajustes', icon: 'settings' },
@@ -51,10 +53,23 @@ export default function TabsLayout() {
     };
   }, [granted]);
 
+  // Recupera la última cola (en pausa) en cuanto la biblioteca está cargada.
+  const songs = useLibrary((s) => s.songs);
+  useEffect(() => {
+    if (songs.length > 0) restorePlayback(new Map(songs.map((s) => [s.id, s])));
+  }, [songs]);
+
   if (!granted) return <Redirect href="/bienvenida" />;
 
   return (
     <Tabs
+      backBehavior="history"
+      tabBar={(props) => (
+        <>
+          <MiniPlayer />
+          <BottomTabBar {...props} />
+        </>
+      )}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.accent,

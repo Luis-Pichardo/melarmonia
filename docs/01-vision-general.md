@@ -32,6 +32,7 @@ En primer lugar, el propio creador de la app. Después, cualquier persona a la q
 | Reproductor | Pausa, anterior/siguiente, aleatorio, repetir (desactivado / todas / una), barra de progreso |
 | Segundo plano | Sigue sonando con la pantalla apagada; controles en la notificación y la pantalla de bloqueo |
 | Auriculares | Botones de Bluetooth y de cable; pausa automática al desconectarlos |
+| Reanudar | Al abrir la app, vuelve la última canción en el mismo punto |
 | Listas | Crear, renombrar, borrar y reordenar listas; añadir y quitar canciones |
 | Favoritos | Marcar canciones con ❤ |
 | Búsqueda | Por título, artista o álbum |
@@ -41,6 +42,8 @@ En primer lugar, el propio creador de la app. Después, cualquier persona a la q
 ## Fuera de la versión 1.0 (ideas futuras)
 
 - Ecualizador.
+- Transición suave entre canciones (*crossfade*).
+- Reanudar la música al conectar el Bluetooth.
 - Temporizador para apagar la música.
 - Letras de canciones (archivos `.lrc`).
 - Editar título, artista y carátula de las canciones.

@@ -7,7 +7,9 @@
 | Framework | React Native + **Expo SDK 58** | Un solo código, compilación en la nube con EAS |
 | Lenguaje | **TypeScript** | Menos errores y mejor autocompletado |
 | Navegación | Expo Router (`expo-router/js-tabs` para el menú inferior) | Navegación basada en archivos |
-| Audio | `react-native-track-player` | Segundo plano, notificación, pantalla de bloqueo, Bluetooth |
+| Audio | `expo-audio` (`AudioPlaylist`) | Librería oficial de Expo: lista nativa, segundo plano, notificación, pantalla de bloqueo, auriculares y pausa al desconectarlos |
+| Barra de progreso | `@react-native-community/slider` | Control nativo de Android |
+| Gestos | `react-native-gesture-handler` + `react-native-reanimated` | Deslizar la carátula y cerrar el reproductor |
 | Lectura de la música | `expo-media-library` (API `expo-media-library/legacy`) | Consulta el MediaStore de Android, con páginas de 500 audios |
 | Metadatos y carátulas | `@missingcore/react-native-metadata-retriever` | Lee las etiquetas con el lector nativo de Android (Media3): título, artista, álbum, pista, año y carátula |
 | Archivos | `expo-file-system` | Guarda las carátulas en la carpeta de la app |
@@ -22,29 +24,34 @@
 
 > Como el reproductor usa módulos nativos, no funciona en Expo Go: se usa un **development build** (`expo-dev-client`).
 
+> **Por qué `expo-audio` y no `react-native-track-player`:** la documentación inicial proponía `react-native-track-player`, pero lleva meses sin actualizarse y da problemas con la arquitectura nueva de React Native que usa Expo SDK 58. `expo-audio` es la librería oficial, se actualiza con cada versión de Expo y su `AudioPlaylist` ya resuelve la lista, el segundo plano y los controles del sistema.
+
 ## 4.2 Estructura de carpetas
 
 ```
 melarmonia/
 ├── src/
 │   ├── app/                    # Pantallas (Expo Router): cada archivo es una pantalla
-│   │   ├── _layout.tsx         # Raíz: fuentes, tema, pantalla de carga
-│   │   ├── (tabs)/
-│   │   │   ├── _layout.tsx     # Menú inferior con 4 pestañas
-│   │   │   ├── index.tsx       # Biblioteca
-│   │   │   ├── buscar.tsx
-│   │   │   ├── listas.tsx
-│   │   │   └── ajustes.tsx
-│   │   ├── reproductor.tsx     # (etapa 3)
+│   │   ├── _layout.tsx         # Raíz: fuentes, tema, permiso, avisos
+│   │   ├── bienvenida.tsx      # Bienvenida y permiso de música
+│   │   ├── reproductor.tsx     # Reproductor completo
 │   │   ├── cola.tsx            # (etapa 4)
-│   │   └── bienvenida.tsx      # (etapa 2)
+│   │   └── (tabs)/
+│   │       ├── _layout.tsx     # Menú inferior + mini reproductor
+│   │       ├── (biblioteca)/   # Pila de la Biblioteca
+│   │       │   ├── index.tsx
+│   │       │   ├── album/[id].tsx
+│   │       │   └── artista/[name].tsx
+│   │       ├── buscar.tsx
+│   │       ├── listas.tsx
+│   │       └── ajustes.tsx
 │   ├── components/             # AppText, Screen, fila de canción, mini reproductor…
 │   ├── theme/                  # colors.ts, typography.ts, spacing.ts, ThemeProvider.tsx
-│   ├── storage/                # Ajustes guardados (MMKV)
-│   ├── player/                 # Servicio de reproducción y cola (etapa 3)
-│   ├── library/                # Búsqueda de música y metadatos (etapa 2)
-│   ├── db/                     # SQLite: esquema y consultas (etapa 2)
-│   ├── store/                  # Estado global (Zustand)
+│   ├── storage/                # Ajustes y última reproducción (MMKV)
+│   ├── player/                 # Motor de reproducción y cola
+│   ├── library/                # Búsqueda de música, metadatos y listas derivadas
+│   ├── db/                     # SQLite: esquema y consultas
+│   ├── store/                  # Estado global (Zustand): biblioteca y avisos
 │   └── utils/
 ├── assets/images/              # Icono, pantalla de carga
 ├── docs/                       # Esta documentación
@@ -69,7 +76,20 @@ Archivo: `src/library/scanner.ts`.
 
 **Agrupación:** un álbum es la combinación de *artista del álbum* + *nombre del álbum*. Los artistas y los álbumes se calculan en memoria a partir de las canciones (`src/library/selectors.ts`).
 
-## 4.4 Base de datos
+## 4.4 Cómo funciona el reproductor (etapa 3)
+
+Archivo: `src/player/player.ts`.
+
+- La cola vive en el estado `usePlayer` y se pasa entera a un `AudioPlaylist` nativo. Así, el paso de una canción a otra, la notificación, la pantalla de bloqueo y los botones de los auriculares funcionan aunque la app esté en segundo plano.
+- **Aleatorio:** se reordena la cola dejando primero la canción actual, y se guarda la cola original para poder quitarlo. Al activarlo o quitarlo, la lista nativa se vuelve a crear en la misma posición.
+- **Repetir:** desactivado / todas / una, que corresponden a `none` / `all` / `single` en la lista nativa.
+- **Anterior:** si van más de 3 s, vuelve al inicio de la canción.
+- **Errores:** si un archivo no se puede reproducir, se avisa y se pasa a la siguiente. Tras 5 errores seguidos, se detiene.
+- **Reanudar:** la cola, la canción, la posición, el aleatorio y la repetición se guardan cada 5 s, al pausar y al cambiar de canción. Al abrir la app se recuperan en pausa.
+- **Pantalla de bloqueo:** se activa con la primera reproducción y muestra título, artista, álbum y carátula, con los botones anterior y siguiente.
+- **Auriculares:** la pausa al desconectarlos la hace Android (`setHandleAudioBecomingNoisy`) y está siempre activa.
+
+## 4.5 Base de datos
 
 Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_version`.
 
@@ -93,7 +113,7 @@ Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_versio
 **favorites**: `song_id`, `added_at`
 **play_history**: `song_id`, `played_at` (para "Recientes" en el futuro)
 
-## 4.5 Ajustes guardados (MMKV)
+## 4.6 Ajustes guardados (MMKV)
 
 | Clave | Valores | Predeterminado |
 |---|---|---|
@@ -103,24 +123,22 @@ Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_versio
 | `excludedFolders` | lista de textos que se buscan en la ruta | WhatsApp Voice Notes, WhatsApp Audio, Telegram Audio, Recordings, Call recordings, Notifications, Ringtones, Alarms |
 | `librarySort` | `title` / `artist` / `dateAdded` / `duration` | `title` |
 | `minDurationSec` | número | `30` |
-| `pauseOnDisconnect` | booleano | `true` |
-| `crossfadeSec` | 0–5 | `0` |
-| `lastQueue`, `lastPosition` | — | Para reanudar donde se quedó |
+| `lastPlayback` | JSON: cola, cola original, canción, posición, aleatorio, repetir, origen | Para reanudar donde se quedó |
+| `askedNotifications` | booleano | Para pedir el permiso de notificaciones una sola vez |
 
-## 4.6 Permisos de Android
+## 4.7 Permisos de Android
 
 | Permiso | Para qué |
 |---|---|
 | `READ_MEDIA_AUDIO` (Android 13+) / `READ_EXTERNAL_STORAGE` (≤12) | Leer la música |
 | `FOREGROUND_SERVICE` y `FOREGROUND_SERVICE_MEDIA_PLAYBACK` | Seguir sonando en segundo plano |
 | `POST_NOTIFICATIONS` (Android 13+) | Mostrar los controles en la notificación |
-| `WAKE_LOCK` | Que no se corte con la pantalla apagada |
 
 La app **no** pide el permiso de internet para nada propio.
 
-Se bloquean de forma expresa los permisos que añaden otras librerías y que no hacen falta: fotos, vídeos, ubicación de los archivos, escritura en el almacenamiento y superposición de ventanas (`android.blockedPermissions` en `app.json`).
+Se bloquean de forma expresa los permisos que añaden otras librerías y que no hacen falta: fotos, vídeos, ubicación de los archivos, escritura en el almacenamiento, superposición de ventanas y micrófono (`android.blockedPermissions` en `app.json`).
 
-## 4.7 Compilación y distribución
+## 4.8 Compilación y distribución
 
 | Comando | Para qué |
 |---|---|

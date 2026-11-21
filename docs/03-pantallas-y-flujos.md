@@ -49,17 +49,24 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 |---|---|
 | Apariencia | Tema (oscuro / claro / sistema) · Color (preestablecidos o personalizado) |
 | Biblioteca | Buscar música de nuevo · Carpetas excluidas (por ejemplo, notas de voz de WhatsApp) · Ignorar audios de menos de 30 s |
-| Reproducción | Pausar al desconectar los auriculares · Reanudar al conectar el Bluetooth · Transición suave entre canciones (0–5 s) |
+| Reproducción | Pausa al desconectar los auriculares (siempre activa, la gestiona Android) |
 | Acerca de | Versión · Manual de usuario · Licencias |
+
+### Mini reproductor
+- Fijo sobre el menú inferior, también en los detalles de álbum y artista.
+- Carátula, título, artista, botón de reproducir/pausar, botón siguiente y barra de progreso fina.
+- Tocarlo abre el reproductor completo.
 
 ### Reproductor completo
 De arriba abajo:
-1. Botón ⌄ (cerrar), "Reproduciendo desde: *nombre de la lista o del álbum*" y botón ⋮.
+1. Botón ⌄ (cerrar) y "Reproduciendo desde: *Todas las canciones, nombre del álbum o del artista*". El botón ⋮ llega en la etapa 4.
 2. Carátula grande. Se desliza a izquierda o derecha para cambiar de canción.
-3. Título (`display`), artista y botón ❤.
+3. Título (`display`) y artista. El botón ❤ llega en la etapa 5.
 4. Barra de progreso, con el tiempo transcurrido y el total.
-5. Controles: 🔀 · ⏮ · **▶/⏸** · ⏭ · 🔁
-6. Botón **Cola** abajo a la derecha.
+5. Controles: 🔀 · ⏮ · **▶/⏸** · ⏭ · 🔁. El aleatorio y la repetición activos se ven en `accent` con un punto debajo.
+6. El botón **Cola** llega en la etapa 4.
+- Fondo: degradado de `primaryDark` a `background`.
+- Deslizar hacia abajo en cualquier parte cierra el reproductor.
 
 ### Cola
 - "Reproduciendo ahora" arriba y, debajo, "A continuación".

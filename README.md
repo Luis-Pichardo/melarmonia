@@ -30,7 +30,7 @@
 
 ## Tecnología
 
-React Native + Expo SDK 58 (TypeScript) · `react-native-track-player` · Solo Android.
+React Native + Expo SDK 58 (TypeScript) · `expo-audio` · Solo Android.
 
 ## Desarrollo
 
@@ -42,4 +42,4 @@ npm run build:apk      # APK de prueba para instalar
 npm run typecheck && npm run lint
 ```
 
-Más detalles en [Arquitectura técnica](docs/04-arquitectura.md#47-compilación-y-distribución).
+Más detalles en [Arquitectura técnica](docs/04-arquitectura.md#48-compilación-y-distribución).

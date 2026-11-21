@@ -18,7 +18,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 0 | Documentación | ✅ Completada |
 | 1 | Base del proyecto | ✅ Completada |
 | 2 | Biblioteca de música | ✅ Completada |
-| 3 | Reproductor | ⏳ Pendiente |
+| 3 | Reproductor | ✅ Completada |
 | 4 | Cola de reproducción | ⏳ Pendiente |
 | 5 | Favoritos y listas | ⏳ Pendiente |
 | 6 | Búsqueda | ⏳ Pendiente |
@@ -97,31 +97,39 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 3 — Reproductor
+## Etapa 3 — Reproductor ✅
 
 **Objetivo:** escuchar música, también con la pantalla apagada.
 
-- [ ] Instalar y configurar `react-native-track-player` y su servicio en segundo plano
-- [ ] Botones **▶ Reproducir todo** y **🔀 Aleatorio** en Canciones, álbumes y artistas
-- [ ] Tocar una canción reproduce esa canción y deja las demás a continuación
-- [ ] Mini reproductor fijo con barra de progreso
-- [ ] Reproductor completo: carátula, título, artista, barra de progreso y controles
-- [ ] Aleatorio y repetir (desactivado / todas / una)
-- [ ] Deslizar la carátula para cambiar de canción y deslizar hacia abajo para cerrar
-- [ ] Controles en la notificación y en la pantalla de bloqueo
-- [ ] Botones de los auriculares y del Bluetooth, y pausa al desconectarlos
-- [ ] Indicador animado en la canción que suena
-- [ ] Manejo de archivos dañados o borrados (aviso y salto a la siguiente)
-- [ ] Recordar la última canción y la posición al reabrir la app
+- [x] Configurar la reproducción en segundo plano con `expo-audio` (`AudioPlaylist`)
+- [x] Botones **▶ Reproducir todo** y **🔀 Aleatorio** en Canciones, álbumes y artistas
+- [x] Tocar una canción reproduce esa canción y deja las demás a continuación
+- [x] Mini reproductor fijo con barra de progreso
+- [x] Reproductor completo: carátula, título, artista, barra de progreso y controles
+- [x] Aleatorio y repetir (desactivado / todas / una)
+- [x] Deslizar la carátula para cambiar de canción y deslizar hacia abajo para cerrar
+- [x] Controles en la notificación y en la pantalla de bloqueo
+- [x] Botones de los auriculares y del Bluetooth, y pausa al desconectarlos
+- [x] Indicador animado en la canción que suena
+- [x] Manejo de archivos dañados o borrados (aviso y salto a la siguiente)
+- [x] Recordar la última canción y la posición al reabrir la app
 
 **Entregable:** APK que reproduce música completa en segundo plano.
 **Aceptación:** la música sigue con la pantalla apagada y se controla desde la notificación y los auriculares.
+
+**Notas de la etapa:**
+- Se usa `expo-audio` en lugar de `react-native-track-player`: es la librería oficial de Expo y la otra da problemas con la arquitectura nueva de React Native (ver arquitectura, 4.1).
+- Las pantallas de la Biblioteca pasan a una pila propia dentro de la pestaña, para que el menú inferior y el mini reproductor sigan visibles en los detalles.
+- La pausa al desconectar los auriculares la hace Android y está siempre activa.
+- El botón ❤ (etapa 5) y los botones ⋮ y Cola (etapa 4) se añaden en sus etapas.
+- Hace falta un APK nuevo: esta etapa añade módulos nativos y el permiso de notificaciones.
 
 ---
 
 ## Etapa 4 — Cola de reproducción
 
 - [ ] Pantalla de cola: "Reproduciendo ahora" y "A continuación"
+- [ ] Botón **Cola** y botón ⋮ en el reproductor completo
 - [ ] Reordenar arrastrando
 - [ ] Quitar canciones deslizando
 - [ ] Opciones "Reproducir a continuación" y "Añadir a la cola" en el menú ⋮
@@ -165,7 +173,7 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 - [ ] Colores preparados: morado, azul, verde, rojo, naranja y rosa
 - [ ] Color personalizado con selector, cálculo de los tonos oscuro y claro y control de contraste
 - [ ] Biblioteca: buscar música de nuevo, carpetas excluidas y duración mínima
-- [ ] Reproducción: pausar al desconectar, reanudar con Bluetooth y transición suave
+- [ ] Reproducción: información sobre la pausa al desconectar los auriculares (siempre activa)
 - [ ] Acerca de: versión, enlace al manual y licencias
 - [ ] Guardado de ajustes con MMKV
 

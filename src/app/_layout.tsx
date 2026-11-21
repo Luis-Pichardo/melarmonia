@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import { Toast } from '@/components/Toast';
 import { useLibrary } from '@/store/library';
 import { fontAssets, MelarmoniaThemeProvider, useTheme } from '@/theme';
 
@@ -32,9 +33,16 @@ function NavigationTheme() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="bienvenida" options={{ animation: 'fade' }} />
-        <Stack.Screen name="album/[id]" />
-        <Stack.Screen name="artista/[name]" />
+        <Stack.Screen
+          name="reproductor"
+          options={{
+            animation: 'slide_from_bottom',
+            gestureEnabled: true,
+            gestureDirection: 'vertical',
+          }}
+        />
       </Stack>
+      <Toast />
     </ThemeProvider>
   );
 }

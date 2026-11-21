@@ -1,6 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,9 +9,11 @@ import { DetailHeader } from '@/components/DetailHeader';
 import { EmptyState } from '@/components/EmptyState';
 import { Artwork } from '@/components/library/Artwork';
 import { SongRow } from '@/components/library/SongRow';
+import { PlayAllBar } from '@/components/player/PlayAllBar';
 import { useAlbum } from '@/library/selectors';
 import { formatDuration, pluralize } from '@/library/text';
 import type { Song } from '@/library/types';
+import { playSongs } from '@/player/player';
 import { radius, sizes, spacing, useTheme } from '@/theme';
 
 /** Detalle de álbum: carátula grande y canciones en orden (pantallas y flujos, 3.2). */
@@ -20,9 +22,15 @@ export default function AlbumScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { album, tracks } = useAlbum(id ?? '');
 
+  const label = album?.title ?? '';
+  const indexById = useMemo(() => new Map(tracks.map((s, i) => [s.id, i])), [tracks]);
+  const onPress = useCallback(
+    (song: Song) => playSongs(tracks, indexById.get(song.id) ?? 0, label),
+    [tracks, indexById, label],
+  );
   const renderItem = useCallback(
-    ({ item }: { item: Song }) => <SongRow song={item} showTrackNumber />,
-    [],
+    ({ item }: { item: Song }) => <SongRow song={item} showTrackNumber onPress={onPress} />,
+    [onPress],
   );
 
   if (!album) {
@@ -78,6 +86,9 @@ export default function AlbumScreen() {
             <AppText variant="caption" tone="secondary" style={styles.center}>
               {details}
             </AppText>
+            <View style={styles.playAll}>
+              <PlayAllBar songs={tracks} sourceLabel={album.title} />
+            </View>
           </View>
         }
         contentContainerStyle={styles.list}
@@ -92,9 +103,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.xxs,
     paddingHorizontal: sizes.screenPadding,
-    paddingBottom: spacing.md,
+    paddingBottom: spacing.xs,
   },
   artwork: { marginBottom: spacing.md },
   center: { textAlign: 'center' },
+  playAll: { alignSelf: 'stretch', marginTop: spacing.md, marginHorizontal: -sizes.screenPadding },
   list: { paddingBottom: spacing.lg },
 });

@@ -3,8 +3,10 @@ import { memo } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/AppText';
+import { NowPlayingBars } from '@/components/player/NowPlayingBars';
 import { formatDuration } from '@/library/text';
 import type { Song } from '@/library/types';
+import { usePlayer } from '@/player/player';
 import { radius, sizes, spacing, useTheme } from '@/theme';
 
 import { Artwork } from './Artwork';
@@ -28,6 +30,8 @@ export const SongRow = memo(function SongRow({
   onMorePress,
 }: SongRowProps) {
   const { colors } = useTheme();
+  const isCurrent = usePlayer((s) => s.current?.id === song.id);
+  const playing = usePlayer((s) => isCurrent && s.playing);
 
   return (
     <Pressable
@@ -38,15 +42,26 @@ export const SongRow = memo(function SongRow({
       style={styles.row}>
       {showTrackNumber ? (
         <View style={styles.trackNumber}>
-          <AppText variant="bodySmall" tone="secondary">
-            {song.trackNumber ?? '–'}
-          </AppText>
+          {isCurrent ? (
+            <NowPlayingBars color={colors.accent} playing={playing} />
+          ) : (
+            <AppText variant="bodySmall" tone="secondary">
+              {song.trackNumber ?? '–'}
+            </AppText>
+          )}
         </View>
       ) : (
-        <Artwork uri={song.artworkPath} size={sizes.listArtwork} radius={radius.sm} />
+        <View>
+          <Artwork uri={song.artworkPath} size={sizes.listArtwork} radius={radius.sm} />
+          {isCurrent ? (
+            <View style={[styles.overlay, { borderRadius: radius.sm }]}>
+              <NowPlayingBars color="#FFFFFF" playing={playing} />
+            </View>
+          ) : null}
+        </View>
       )}
       <View style={styles.text}>
-        <AppText variant="body" numberOfLines={1}>
+        <AppText variant="body" numberOfLines={1} tone={isCurrent ? 'accent' : 'primary'}>
           {song.title}
         </AppText>
         <AppText variant="bodySmall" tone="secondary" numberOfLines={1}>
@@ -77,6 +92,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: sizes.screenPadding,
   },
   trackNumber: { width: sizes.listArtwork, alignItems: 'center' },
+  overlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   text: { flex: 1, minWidth: 0 },
   more: {
     width: sizes.minTouchTarget - spacing.xs,
