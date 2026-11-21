@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import { useLibrary } from '@/store/library';
 import { fontAssets, MelarmoniaThemeProvider, useTheme } from '@/theme';
 
 SplashScreen.preventAutoHideAsync();
@@ -30,6 +31,9 @@ function NavigationTheme() {
       <StatusBar style={mode === 'dark' ? 'light' : 'dark'} />
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="bienvenida" options={{ animation: 'fade' }} />
+        <Stack.Screen name="album/[id]" />
+        <Stack.Screen name="artista/[name]" />
       </Stack>
     </ThemeProvider>
   );
@@ -37,12 +41,19 @@ function NavigationTheme() {
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);
+  const permission = useLibrary((s) => s.permission);
+  const checkPermission = useLibrary((s) => s.checkPermission);
+  const ready = (fontsLoaded || !!fontError) && permission !== 'checking';
 
   useEffect(() => {
-    if (fontsLoaded || fontError) SplashScreen.hideAsync();
-  }, [fontsLoaded, fontError]);
+    checkPermission().catch(() => useLibrary.setState({ permission: 'undetermined' }));
+  }, [checkPermission]);
 
-  if (!fontsLoaded && !fontError) return null;
+  useEffect(() => {
+    if (ready) SplashScreen.hideAsync();
+  }, [ready]);
+
+  if (!ready) return null;
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

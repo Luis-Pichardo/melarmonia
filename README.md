@@ -42,4 +42,4 @@ npm run build:apk      # APK de prueba para instalar
 npm run typecheck && npm run lint
 ```
 
-Más detalles en [Arquitectura técnica](docs/04-arquitectura.md#46-compilación-y-distribución).
+Más detalles en [Arquitectura técnica](docs/04-arquitectura.md#47-compilación-y-distribución).
