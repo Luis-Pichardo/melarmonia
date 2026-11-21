@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { SongMenuSheet } from '@/components/library/SongMenuSheet';
+import { AddToPlaylistSheet } from '@/components/playlists/AddToPlaylistSheet';
 import { Toast } from '@/components/Toast';
 import { useLibrary } from '@/store/library';
 import { fontAssets, MelarmoniaThemeProvider, useTheme } from '@/theme';
@@ -45,6 +46,7 @@ function NavigationTheme() {
         <Stack.Screen name="cola" options={{ animation: 'slide_from_bottom' }} />
       </Stack>
       <SongMenuSheet />
+      <AddToPlaylistSheet />
       <Toast />
     </ThemeProvider>
   );

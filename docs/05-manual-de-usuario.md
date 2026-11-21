@@ -109,22 +109,23 @@ Toca ⋮ en cualquier canción (o en el reproductor) para: reproducirla a contin
 ## 6. Favoritos y listas
 
 ### Favoritos
-Toca ❤ en el reproductor, o ⋮ → **Añadir a favoritos** en cualquier canción. Los encontrarás en **Listas → Favoritos**.
+Toca ❤ en el reproductor, o ⋮ → **Añadir a favoritos** en cualquier canción. Los encontrarás en **Listas → Favoritos**, de la más reciente a la más antigua. Para quitar una, toca ❤ otra vez o deslízala dentro de Favoritos.
 
 ### Crear una lista
 1. Ve a la pestaña **Listas** y toca **+ Nueva lista**.
-2. Escribe un nombre y toca **Crear**.
-3. Toca **Añadir canciones**, marca las que quieras y toca **Listo**.
+2. Escribe un nombre y toca **Crear**. La lista se abre.
+3. Toca **Añadir canciones**, marca las que quieras (puedes usar el buscador) y toca **Añadir N canciones**.
 
 ### Añadir canciones desde cualquier sitio
-Toca ⋮ en una canción → **Añadir a lista** → elige la lista.
+Toca ⋮ en una canción → **Añadir a lista…** → elige la lista, o toca **Nueva lista** para crearla con esa canción dentro. Si la canción ya estaba en la lista, te avisa.
 
 ### Gestionar una lista
-- **Reordenar:** mantén pulsada una canción y arrástrala.
-- **Quitar una canción:** ⋮ → **Quitar de la lista**.
-- **Renombrar o borrar la lista:** ⋮ arriba a la derecha.
+- **Reproducir:** **Reproducir** o **Aleatorio** arriba, o toca una canción.
+- **Reordenar:** mantén pulsada una canción (o arrástrala desde ≡).
+- **Quitar una canción:** deslízala hacia un lado.
+- **Renombrar o borrar la lista:** ⋮ arriba a la derecha. Antes de borrar, la app te pide confirmación.
 
-> Borrar una lista **no** borra las canciones de tu teléfono.
+> Borrar una lista **no** borra las canciones de tu teléfono. Una canción no puede estar dos veces en la misma lista.
 
 ## 7. Buscar
 

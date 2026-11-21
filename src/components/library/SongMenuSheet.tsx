@@ -4,6 +4,8 @@ import { StyleSheet, View } from 'react-native';
 import { AppText } from '@/components/AppText';
 import { BottomSheet, SheetOption } from '@/components/BottomSheet';
 import { addToQueue, playNext } from '@/player/player';
+import { openPlaylistPicker } from '@/store/playlistPicker';
+import { usePlaylists } from '@/store/playlists';
 import { useSongMenu } from '@/store/songMenu';
 import { radius, sizes, spacing, useTheme } from '@/theme';
 
@@ -11,12 +13,16 @@ import { Artwork } from './Artwork';
 
 /**
  * Menú ⋮ de una canción (pantallas y flujos, 3.3), reutilizable desde cualquier lista
- * y desde el reproductor. Las opciones de listas y favoritos se añaden en la etapa 5.
+ * y desde el reproductor.
  */
 export function SongMenuSheet() {
   const { colors } = useTheme();
   const song = useSongMenu((s) => s.song);
   const close = useSongMenu((s) => s.close);
+  const context = useSongMenu((s) => s.context);
+  const isFavorite = usePlaylists((s) => (song ? s.favoriteSet.has(song.id) : false));
+  const toggleFavorite = usePlaylists((s) => s.toggleFavorite);
+  const removeSong = usePlaylists((s) => s.removeSong);
 
   const run = (action: () => void) => {
     close();
@@ -54,6 +60,23 @@ export function SongMenuSheet() {
             label="Añadir a la cola"
             onPress={() => run(() => addToQueue(song))}
           />
+          <SheetOption
+            icon={isFavorite ? 'favorite' : 'favorite-border'}
+            label={isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+            onPress={() => run(() => toggleFavorite(song))}
+          />
+          <SheetOption
+            icon="library-add"
+            label="Añadir a lista…"
+            onPress={() => run(() => openPlaylistPicker([song.id]))}
+          />
+          {context.playlistId !== undefined ? (
+            <SheetOption
+              icon="remove-circle-outline"
+              label="Quitar de la lista"
+              onPress={() => run(() => removeSong(context.playlistId!, song.id))}
+            />
+          ) : null}
           <SheetOption
             icon="album"
             label="Ir al álbum"

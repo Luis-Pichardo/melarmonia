@@ -39,10 +39,10 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 - Sin texto escrito, muestra las búsquedas recientes.
 
 ### Listas
-- Arriba, la lista fija **❤ Favoritos**.
-- Debajo, las listas del usuario, con un mosaico de 4 carátulas y "N canciones".
-- Botón **+ Nueva lista**.
-- Detalle de lista: reproducir, aleatorio, reordenar arrastrando, quitar canciones, y renombrar o borrar desde ⋮.
+- Arriba, el botón **+ Nueva lista**. Debajo, la lista fija **❤ Favoritos** (degradado de marca con un corazón) y las listas del usuario, con un mosaico de 4 carátulas y "N canciones", de la más reciente a la más antigua.
+- **Detalle de lista**: mosaico grande, nombre, número de canciones y duración total. Tiene **Reproducir**, **Aleatorio** y **Añadir canciones**; se reordena manteniendo pulsado o arrastrando desde ≡, y se quitan canciones deslizándolas. Desde ⋮ (arriba a la derecha) se puede añadir canciones, renombrar o borrar la lista, con confirmación.
+- **Detalle de Favoritos**: igual, pero sin reordenar, renombrar ni borrar. Deslizar una canción la quita de favoritos.
+- **Añadir canciones**: todas las canciones con buscador y casillas. Las que ya están en la lista aparecen marcadas y atenuadas. El botón de abajo dice cuántas se van a añadir.
 
 ### Ajustes
 | Sección | Opciones |
@@ -61,7 +61,7 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 De arriba abajo:
 1. Botón ⌄ (cerrar), "Reproduciendo desde: *Todas las canciones, nombre del álbum o del artista*" y botón ⋮ (menú de la canción).
 2. Carátula grande. Se desliza a izquierda o derecha para cambiar de canción.
-3. Título (`display`) y artista. El botón ❤ llega en la etapa 5.
+3. Título (`display`), artista y botón ❤ (en color `favorite` cuando está marcado).
 4. Barra de progreso, con el tiempo transcurrido y el total.
 5. Controles: 🔀 · ⏮ · **▶/⏸** · ⏭ · 🔁. El aleatorio y la repetición activos se ven en `accent` con un punto debajo.
 6. Botón **Cola** abajo a la derecha.
@@ -81,9 +81,10 @@ De arriba abajo:
 Hoja inferior con la carátula, el título, el artista y el álbum, y estas opciones:
 - **Reproducir a continuación**
 - **Añadir a la cola**
+- **Añadir a favoritos** / **Quitar de favoritos**
+- **Añadir a lista…**: abre la hoja con **Nueva lista** y las listas existentes
 - **Ir al álbum**
 - **Ir al artista**
-- *(Etapa 5)* Añadir a favoritos · Añadir a lista
 
 Está en todas las filas de canción y en el reproductor completo.
 
@@ -91,9 +92,11 @@ Está en todas las filas de canción y en el reproductor completo.
 
 **Primera vez:** abrir la app → Bienvenida → Empezar → dar el permiso → la biblioteca se carga → tocar una canción → suena, y aparece el mini reproductor.
 
-**Crear una lista:** Listas → + Nueva lista → escribir el nombre → Crear → abrir la lista → Añadir canciones (selección múltiple) → Listo.
+**Crear una lista:** Listas → + Nueva lista → escribir el nombre → Crear → se abre la lista → Añadir canciones (selección múltiple) → Añadir N canciones.
 
-**Añadir una canción a una lista desde cualquier sitio:** ⋮ en la canción → Añadir a lista → elegir una lista (o crear una nueva).
+**Añadir una canción a una lista desde cualquier sitio:** ⋮ en la canción → Añadir a lista… → elegir una lista o **Nueva lista** (se crea y se añade la canción).
+
+**Marcar como favorita:** ❤ en el reproductor, o ⋮ → Añadir a favoritos.
 
 **Cambiar el color:** Ajustes → Apariencia → Color → elegir uno → la app cambia al momento.
 
