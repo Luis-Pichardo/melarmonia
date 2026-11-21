@@ -34,9 +34,11 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 - Deslizar hacia abajo vuelve a buscar música nueva. Además, la app busca sola al abrirse, al volver a ella y cuando Android avisa de audios nuevos o borrados.
 
 ### Buscar
-- Campo de búsqueda con el teclado abierto al entrar.
-- Resultados agrupados en **Canciones**, **Artistas** y **Álbumes**, que se actualizan mientras se escribe.
-- Sin texto escrito, muestra las búsquedas recientes.
+- Campo de búsqueda redondeado, con el teclado abierto al entrar en la pestaña y un botón × para borrar.
+- Resultados agrupados en **Canciones** (primeras 20), **Artistas** (primeros 5) y **Álbumes** (fila horizontal), con el total de cada grupo y **Ver todos** para mostrar el resto. Se actualizan mientras se escribe.
+- Sin distinguir mayúsculas ni tildes, y con varias palabras ("juan café"). Primero aparece lo que empieza por el texto buscado.
+- Tocar una canción reproduce los resultados empezando por ella ("Reproduciendo desde: Búsqueda: «texto»"). Tocar un artista o un álbum abre su detalle.
+- Sin texto escrito: las 10 **búsquedas recientes**, que se quitan con × o todas con **Borrar**. Se guardan al tocar un resultado o al pulsar buscar en el teclado.
 
 ### Listas
 - Arriba, el botón **+ Nueva lista**. Debajo, la lista fija **❤ Favoritos** (degradado de marca con un corazón) y las listas del usuario, con un mosaico de 4 carátulas y "N canciones", de la más reciente a la más antigua.

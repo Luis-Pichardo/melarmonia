@@ -21,7 +21,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 3 | Reproductor | ✅ Completada |
 | 4 | Cola de reproducción | ✅ Completada |
 | 5 | Favoritos y listas | ✅ Completada |
-| 6 | Búsqueda | ⏳ Pendiente |
+| 6 | Búsqueda | ✅ Completada |
 | 7 | Ajustes y personalización | ⏳ Pendiente |
 | 8 | Pulido visual y rendimiento | ⏳ Pendiente |
 | 9 | Pruebas y lanzamiento 1.0 | ⏳ Pendiente |
@@ -168,15 +168,21 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 6 — Búsqueda
+## Etapa 6 — Búsqueda ✅
 
-- [ ] Pestaña Buscar con el teclado abierto al entrar
-- [ ] Resultados en vivo agrupados en Canciones, Artistas y Álbumes
-- [ ] Búsqueda sin distinguir mayúsculas ni tildes ("cancion" encuentra "Canción")
-- [ ] Búsquedas recientes
-- [ ] Estado sin resultados
+- [x] Pestaña Buscar con el teclado abierto al entrar
+- [x] Resultados en vivo agrupados en Canciones, Artistas y Álbumes
+- [x] Búsqueda sin distinguir mayúsculas ni tildes ("cancion" encuentra "Canción")
+- [x] Búsquedas recientes
+- [x] Estado sin resultados
 
 **Entregable y aceptación:** cualquier canción, artista o álbum se encuentra en menos de un segundo.
+
+**Notas de la etapa:**
+- Búsqueda en memoria: menos de 1 ms por búsqueda con 8.000 canciones (prueba de rendimiento).
+- Admite varias palabras y ordena primero lo que empieza por el texto buscado.
+- **Ver todos** en Canciones (a partir de 20) y Artistas (a partir de 5).
+- Tocar una canción reproduce los resultados de la búsqueda.
 
 ---
 

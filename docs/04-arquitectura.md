@@ -94,6 +94,10 @@ Archivo: `src/player/player.ts`.
 - **Auriculares:** la pausa al desconectarlos la hace Android (`setHandleAudioBecomingNoisy`) y está siempre activa.
 - **Cola (etapa 4):** *Reproducir a continuación* inserta detrás de la actual, *Añadir a la cola* añade al final, y también se puede quitar, mover o vaciar lo que queda. Cada cambio se aplica a la vez en el estado y en la lista nativa (`insert`, `add`, `remove`), sin cortar la canción que suena; por eso la canción actual no se puede mover ni quitar. Cada elemento de la cola tiene una clave propia, porque una canción puede estar dos veces. Con el aleatorio activo, los cambios también se aplican a la cola original.
 
+### Búsqueda (etapa 6)
+
+Archivo: `src/library/search.ts`. Se crea en memoria un índice con el texto normalizado (sin tildes y en minúsculas) de cada canción, artista y álbum, y se vuelve a crear cuando cambia la biblioteca. Cada palabra buscada debe aparecer en el título, el artista o el álbum. El orden es: empieza por el texto → una palabra empieza por él → lo contiene → solo coincide el artista o el álbum. Con 8.000 canciones, cada búsqueda tarda menos de 1 ms.
+
 ## 4.5 Base de datos
 
 Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_version`.
@@ -135,6 +139,7 @@ Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_versio
 | `minDurationSec` | número | `30` |
 | `lastPlayback` | JSON: cola, cola original, canción, posición, aleatorio, repetir, origen | Para reanudar donde se quedó |
 | `askedNotifications` | booleano | Para pedir el permiso de notificaciones una sola vez |
+| `recentSearches` | lista de textos (máx. 10) | `[]` |
 
 ## 4.7 Permisos de Android
 
