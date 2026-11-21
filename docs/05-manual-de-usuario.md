@@ -55,7 +55,11 @@ En la pestaña **Biblioteca** está toda tu música, organizada en tres seccione
 
 **¿Descargaste canciones nuevas?** Desliza la lista hacia abajo para actualizarla, o ve a **Ajustes → Biblioteca → Buscar música de nuevo**.
 
-**¿Aparecen audios que no son música (notas de voz, tonos)?** Ve a **Ajustes → Biblioteca → Carpetas excluidas** y añade esas carpetas. Además, los audios de menos de 30 segundos se ocultan por defecto.
+**¿Aparecen audios que no son música (notas de voz, tonos)?** Melarmonía ya oculta los audios de menos de 30 segundos y los de estas carpetas: notas de voz y audios de WhatsApp y Telegram, grabaciones, grabaciones de llamadas, notificaciones, tonos y alarmas. Si aun así aparece alguno, ve a **Ajustes → Biblioteca → Carpetas excluidas** y añade esa carpeta *(disponible a partir de la etapa 7)*.
+
+**Detalle de un álbum:** muestra la carátula grande, el año, el número de canciones, la duración total y las canciones en su orden. Toca el nombre del artista para ver todo lo suyo.
+
+**Detalle de un artista:** muestra sus álbumes (desliza a los lados) y todas sus canciones.
 
 ## 4. Reproducir música
 
@@ -139,7 +143,13 @@ Para volver al original, elige **Morado**.
 ## 10. Preguntas frecuentes y problemas
 
 **No aparece mi música.**
-Comprueba que diste el permiso de *Música y audio* (sección 2). Después, ve a **Ajustes → Biblioteca → Buscar música de nuevo**. Revisa también que la carpeta no esté en *Carpetas excluidas*.
+Comprueba que diste el permiso de *Música y audio* (sección 2). Después, desliza hacia abajo en la Biblioteca para buscar de nuevo. Revisa también que la canción dure más de 30 segundos y que no esté en una carpeta excluida.
+
+**La primera vez tarda en cargar.**
+Es normal: la app lee los datos y las carátulas de todas tus canciones. Las siguientes veces solo revisa lo nuevo y es casi instantáneo.
+
+**Un álbum aparece partido en dos.**
+Ocurre cuando las canciones tienen escrito distinto el artista del álbum o el nombre del álbum. La edición de datos llegará en una versión futura.
 
 **Falta una canción que acabo de descargar.**
 Desliza hacia abajo en la Biblioteca para actualizarla.

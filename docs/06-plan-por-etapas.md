@@ -17,7 +17,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 |---|---|---|
 | 0 | Documentación | ✅ Completada |
 | 1 | Base del proyecto | ✅ Completada |
-| 2 | Biblioteca de música | ⏳ Pendiente |
+| 2 | Biblioteca de música | ✅ Completada |
 | 3 | Reproductor | ⏳ Pendiente |
 | 4 | Cola de reproducción | ⏳ Pendiente |
 | 5 | Favoritos y listas | ⏳ Pendiente |
@@ -68,24 +68,32 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 2 — Biblioteca de música
+## Etapa 2 — Biblioteca de música ✅
 
 **Objetivo:** que la app encuentre y muestre toda la música del teléfono.
 
-- [ ] Pantalla de bienvenida y solicitud del permiso de audio (incluido el caso de rechazo)
-- [ ] Búsqueda de canciones en el MediaStore de Android
-- [ ] Lectura de metadatos (título, artista, álbum, número de pista) y de las carátulas
-- [ ] Base de datos SQLite (`songs`) y caché de carátulas
-- [ ] Filtro de audios de menos de 30 s y de carpetas excluidas
-- [ ] Pestaña Biblioteca con las secciones Canciones, Artistas y Álbumes
-- [ ] Componentes: fila de canción, fila de artista y tarjeta de álbum
-- [ ] Detalle de artista y detalle de álbum
-- [ ] Orden (nombre, artista, fecha, duración) y saltos rápidos A–Z
-- [ ] Deslizar hacia abajo para actualizar
-- [ ] Estados: buscando música, biblioteca vacía, canción sin carátula
+- [x] Pantalla de bienvenida y solicitud del permiso de audio (incluido el caso de rechazo)
+- [x] Búsqueda de canciones en el MediaStore de Android
+- [x] Lectura de metadatos (título, artista, álbum, número de pista) y de las carátulas
+- [x] Base de datos SQLite (`songs`) y caché de carátulas
+- [x] Filtro de audios de menos de 30 s y de carpetas excluidas
+- [x] Pestaña Biblioteca con las secciones Canciones, Artistas y Álbumes
+- [x] Componentes: fila de canción, fila de artista y tarjeta de álbum
+- [x] Detalle de artista y detalle de álbum
+- [x] Orden (nombre, artista, fecha, duración) y saltos rápidos A–Z
+- [x] Deslizar hacia abajo para actualizar
+- [x] Estados: buscando música, biblioteca vacía, canción sin carátula
 
 **Entregable:** APK que muestra toda la música del teléfono, organizada.
 **Aceptación:** aparecen todas las canciones del teléfono con sus datos y carátulas, y la lista se desplaza con fluidez aunque haya miles.
+
+**Notas de la etapa:**
+- Metadatos y carátulas con `@missingcore/react-native-metadata-retriever` (lector nativo de Android). Se extrae una carátula por álbum.
+- Las búsquedas siguientes solo leen archivos nuevos o modificados.
+- La app vuelve a buscar sola al abrirse, al volver a ella y cuando Android avisa de cambios.
+- Las carpetas excluidas tienen una lista predeterminada (WhatsApp, Telegram, grabaciones, tonos…); la pantalla para editarla llega en la etapa 7.
+- Tocar una canción todavía no la reproduce (etapa 3). El botón ⋮ se activa en la etapa 4.
+- Solo se pide el permiso de audio; los de fotos y vídeos se bloquean.
 
 ---
 
@@ -94,8 +102,8 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 **Objetivo:** escuchar música, también con la pantalla apagada.
 
 - [ ] Instalar y configurar `react-native-track-player` y su servicio en segundo plano
+- [ ] Botones **▶ Reproducir todo** y **🔀 Aleatorio** en Canciones, álbumes y artistas
 - [ ] Tocar una canción reproduce esa canción y deja las demás a continuación
-- [ ] Botones de reproducir todo y aleatorio
 - [ ] Mini reproductor fijo con barra de progreso
 - [ ] Reproductor completo: carátula, título, artista, barra de progreso y controles
 - [ ] Aleatorio y repetir (desactivado / todas / una)

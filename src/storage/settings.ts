@@ -43,6 +43,62 @@ export function setAccentChoice(value: AccentChoice): void {
   storage.set(SettingsKeys.accentPreset, value);
 }
 
+// --- Biblioteca -------------------------------------------------------------
+
+/**
+ * Carpetas excluidas por defecto: audios que no son música (notas de voz, grabaciones).
+ * Se comparan como texto dentro de la ruta del archivo, sin distinguir mayúsculas.
+ */
+export const DEFAULT_EXCLUDED_FOLDERS = [
+  'WhatsApp Voice Notes',
+  'WhatsApp Audio',
+  'Telegram Audio',
+  'Recordings',
+  'Call recordings',
+  'Notifications',
+  'Ringtones',
+  'Alarms',
+];
+
+const LIBRARY_KEYS = {
+  minDurationSec: 'minDurationSec',
+  excludedFolders: 'excludedFolders',
+  librarySort: 'librarySort',
+} as const;
+
+export function getMinDurationSec(): number {
+  return storage.getNumber(LIBRARY_KEYS.minDurationSec) ?? 30;
+}
+
+export function getExcludedFolders(): string[] {
+  const raw = storage.getString(LIBRARY_KEYS.excludedFolders);
+  if (!raw) return DEFAULT_EXCLUDED_FOLDERS;
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === 'string') : [];
+  } catch {
+    return DEFAULT_EXCLUDED_FOLDERS;
+  }
+}
+
+export function setExcludedFolders(folders: string[]): void {
+  storage.set(LIBRARY_KEYS.excludedFolders, JSON.stringify(folders));
+}
+
+export type LibrarySort = 'title' | 'artist' | 'dateAdded' | 'duration';
+const SORT_VALUES: LibrarySort[] = ['title', 'artist', 'dateAdded', 'duration'];
+
+export function getLibrarySort(): LibrarySort {
+  const value = storage.getString(LIBRARY_KEYS.librarySort) as LibrarySort | undefined;
+  return value && SORT_VALUES.includes(value) ? value : 'title';
+}
+
+export function setLibrarySort(value: LibrarySort): void {
+  storage.set(LIBRARY_KEYS.librarySort, value);
+}
+
+// --- Color ------------------------------------------------------------------
+
 export function getAccentCustom(): string | undefined {
   return storage.getString(SettingsKeys.accentCustom);
 }

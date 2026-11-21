@@ -8,8 +8,10 @@
 | Lenguaje | **TypeScript** | Menos errores y mejor autocompletado |
 | Navegación | Expo Router (`expo-router/js-tabs` para el menú inferior) | Navegación basada en archivos |
 | Audio | `react-native-track-player` | Segundo plano, notificación, pantalla de bloqueo, Bluetooth |
-| Lectura de la música | `expo-media-library` | Consulta el MediaStore de Android |
-| Metadatos y carátulas | Módulo nativo para leer etiquetas (por definir al implementar) | Título, artista, álbum y carátula |
+| Lectura de la música | `expo-media-library` (API `expo-media-library/legacy`) | Consulta el MediaStore de Android, con páginas de 500 audios |
+| Metadatos y carátulas | `@missingcore/react-native-metadata-retriever` | Lee las etiquetas con el lector nativo de Android (Media3): título, artista, álbum, pista, año y carátula |
+| Archivos | `expo-file-system` | Guarda las carátulas en la carpeta de la app |
+| Imágenes | `expo-image` | Carátulas con caché y transiciones suaves |
 | Estado de la app | Zustand | Simple y ligero |
 | Base de datos local | `expo-sqlite` | Canciones, listas, favoritos, historial |
 | Ajustes | `react-native-mmkv` v4 (con `react-native-nitro-modules`) | Lectura instantánea al abrir la app |
@@ -53,39 +55,59 @@ melarmonia/
 
 > Las carpetas `android/` e `ios/` **no** se guardan en el repositorio: Expo las genera al compilar (Continuous Native Generation). Toda la configuración nativa va en `app.json`.
 
-## 4.3 Base de datos
+## 4.3 Cómo se busca la música (etapa 2)
 
-**songs**
+Archivo: `src/library/scanner.ts`.
+
+1. **Listar:** se piden al MediaStore todos los audios, en páginas de 500.
+2. **Filtrar:** se descartan los de menos de 30 s y los que están en carpetas excluidas.
+3. **Comparar:** con la base de datos. Solo se leen los archivos nuevos o con fecha de modificación distinta, y se borran los que ya no existen. Por eso, la segunda vez es casi instantánea.
+4. **Leer etiquetas:** en lotes de 40 archivos. Si falta el título se usa el nombre del archivo; si falta el artista, "Artista desconocido"; si falta el álbum, "Álbum desconocido".
+5. **Carátulas:** se extrae **una por álbum** y se guarda como JPG en `documentos/artwork/`.
+
+**Cuándo se busca:** al abrir la app (primero se muestra lo guardado y se actualiza en segundo plano), al volver a la app, cuando Android avisa de cambios en los audios, y al deslizar hacia abajo en la Biblioteca.
+
+**Agrupación:** un álbum es la combinación de *artista del álbum* + *nombre del álbum*. Los artistas y los álbumes se calculan en memoria a partir de las canciones (`src/library/selectors.ts`).
+
+## 4.4 Base de datos
+
+Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_version`.
+
+**songs** (etapa 2)
 | Campo | Tipo | Nota |
 |---|---|---|
 | id | TEXT PK | ID del MediaStore |
 | uri | TEXT | Ruta del archivo |
+| filename, folder | TEXT | Nombre del archivo y carpeta (para las exclusiones) |
 | title, artist, album | TEXT | |
-| album_id | TEXT | Para agrupar los álbumes |
+| album_artist | TEXT | Artista del álbum (o el artista, si falta) |
+| album_id | TEXT | Clave del álbum: artista del álbum + álbum |
 | duration_ms | INTEGER | |
-| track_number | INTEGER | Orden dentro del álbum |
-| artwork_path | TEXT | Carátula guardada en caché |
+| track_number, year | INTEGER | Orden dentro del álbum y año |
+| artwork_path | TEXT | Carátula guardada en la app |
 | date_added | INTEGER | |
+| modified_at | INTEGER | Para detectar archivos modificados |
 
 **playlists**: `id`, `name`, `created_at`, `updated_at`
 **playlist_songs**: `playlist_id`, `song_id`, `position`
 **favorites**: `song_id`, `added_at`
 **play_history**: `song_id`, `played_at` (para "Recientes" en el futuro)
 
-## 4.4 Ajustes guardados (MMKV)
+## 4.5 Ajustes guardados (MMKV)
 
 | Clave | Valores | Predeterminado |
 |---|---|---|
 | `theme` | `dark` / `light` / `system` | `dark` |
 | `accentPreset` | `purple` / `blue` / `green` / `red` / `orange` / `pink` / `custom` | `purple` |
 | `accentCustom` | hex | — |
-| `excludedFolders` | lista de rutas | `[]` |
+| `excludedFolders` | lista de textos que se buscan en la ruta | WhatsApp Voice Notes, WhatsApp Audio, Telegram Audio, Recordings, Call recordings, Notifications, Ringtones, Alarms |
+| `librarySort` | `title` / `artist` / `dateAdded` / `duration` | `title` |
 | `minDurationSec` | número | `30` |
 | `pauseOnDisconnect` | booleano | `true` |
 | `crossfadeSec` | 0–5 | `0` |
 | `lastQueue`, `lastPosition` | — | Para reanudar donde se quedó |
 
-## 4.5 Permisos de Android
+## 4.6 Permisos de Android
 
 | Permiso | Para qué |
 |---|---|
@@ -96,7 +118,9 @@ melarmonia/
 
 La app **no** pide el permiso de internet para nada propio.
 
-## 4.6 Compilación y distribución
+Se bloquean de forma expresa los permisos que añaden otras librerías y que no hacen falta: fotos, vídeos, ubicación de los archivos, escritura en el almacenamiento y superposición de ventanas (`android.blockedPermissions` en `app.json`).
+
+## 4.7 Compilación y distribución
 
 | Comando | Para qué |
 |---|---|

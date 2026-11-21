@@ -22,15 +22,16 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 ### Bienvenida
 - Fondo con el degradado de marca, el logo y el texto "Tu música, sin interrupciones".
 - Botón **Empezar**, que pide el permiso de acceso a la música.
-- Si el usuario rechaza el permiso, aparece una explicación y el botón **Abrir ajustes**.
+- Si el usuario rechaza el permiso, aparece una explicación y los botones **Abrir ajustes** y **Ya lo activé**.
+- Si más adelante se retira el permiso, la app vuelve a esta pantalla.
 
 ### Biblioteca
 - Título "Biblioteca" y tres pestañas superiores: **Canciones · Artistas · Álbumes**.
-- **Canciones**: lista en orden alfabético, con letras rápidas a la derecha para saltar (A–Z). Arriba, los botones **▶ Reproducir todo** y **🔀 Aleatorio**.
-- **Artistas**: lista de artistas. Al tocar uno se abre su detalle (sus álbumes y sus canciones).
-- **Álbumes**: cuadrícula de 2 columnas. Al tocar uno se abre su detalle (carátula grande y canciones en orden).
-- Orden configurable con el botón ⇅: por nombre, por artista, por fecha de añadido o por duración.
-- Deslizar hacia abajo vuelve a buscar música nueva.
+- **Canciones**: lista en orden alfabético, con letras rápidas a la derecha para saltar (A–Z) y el total de canciones arriba. Los botones **▶ Reproducir todo** y **🔀 Aleatorio** se añaden en la etapa 3.
+- **Artistas**: lista de artistas con letras rápidas A–Z. Al tocar uno se abre su detalle: sus álbumes en una fila horizontal y sus canciones.
+- **Álbumes**: cuadrícula de 2 columnas. Al tocar uno se abre su detalle: carátula grande, año, número de canciones, duración total y las canciones con su número de pista. Tocar el nombre del artista abre su detalle.
+- Orden de las canciones con el botón ⇅: por nombre, por artista, añadidas recientemente o por duración. La app recuerda el orden elegido.
+- Deslizar hacia abajo vuelve a buscar música nueva. Además, la app busca sola al abrirse, al volver a ella y cuando Android avisa de audios nuevos o borrados.
 
 ### Buscar
 - Campo de búsqueda con el teclado abierto al entrar.
