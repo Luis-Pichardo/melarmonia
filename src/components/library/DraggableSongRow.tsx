@@ -11,23 +11,29 @@ import { Artwork } from '@/components/library/Artwork';
 import type { Song } from '@/library/types';
 import { radius, sizes, spacing, useTheme } from '@/theme';
 
-interface QueueRowProps {
+interface DraggableSongRowProps {
   song: Song;
   position: number;
   onPress: (position: number) => void;
   onRemove: (position: number) => void;
+  /** Texto de la acción de quitar para el lector de pantalla. */
+  removeLabel?: string;
+  /** Sin arrastre (por ejemplo, en Favoritos). */
+  draggable?: boolean;
 }
 
 /**
- * Fila de "A continuación": se arrastra desde ≡ para reordenar y se desliza hacia un lado
- * para quitarla de la cola (pantallas y flujos, 3.2).
+ * Fila de canción que se arrastra desde ≡ para reordenar y se desliza hacia un lado para quitarla.
+ * Se usa en la cola y en las listas de reproducción. Debe ir dentro de un ReorderableList.
  */
-export const QueueRow = memo(function QueueRow({
+export const DraggableSongRow = memo(function DraggableSongRow({
   song,
   position,
   onPress,
   onRemove,
-}: QueueRowProps) {
+  removeLabel = 'Quitar',
+  draggable = true,
+}: DraggableSongRowProps) {
   const { colors } = useTheme();
   const drag = useReorderableDrag();
   const swipeRef = useRef<SwipeableMethods>(null);
@@ -36,7 +42,7 @@ export const QueueRow = memo(function QueueRow({
     <View style={[styles.removeAction, { backgroundColor: colors.error }]}>
       <MaterialIcons name="delete-outline" size={sizes.icon} color="#FFFFFF" />
       <AppText variant="caption" style={styles.removeText}>
-        Quitar
+        {removeLabel}
       </AppText>
     </View>
   );
@@ -57,12 +63,12 @@ export const QueueRow = memo(function QueueRow({
       }}>
       <Pressable
         onPress={() => onPress(position)}
-        onLongPress={drag}
+        onLongPress={draggable ? drag : undefined}
         delayLongPress={250}
         android_ripple={{ color: colors.surfaceVariant }}
         accessibilityRole="button"
-        accessibilityLabel={`${song.title}, ${song.artist}. Mantén pulsado para mover.`}
-        accessibilityActions={[{ name: 'delete', label: 'Quitar de la cola' }]}
+        accessibilityLabel={`${song.title}, ${song.artist}${draggable ? '. Mantén pulsado para mover.' : ''}`}
+        accessibilityActions={[{ name: 'delete', label: removeLabel }]}
         onAccessibilityAction={(e) => e.nativeEvent.actionName === 'delete' && onRemove(position)}
         style={[styles.row, { backgroundColor: colors.background }]}>
         <Artwork uri={song.artworkPath} size={sizes.listArtwork} radius={radius.sm} />
@@ -74,14 +80,16 @@ export const QueueRow = memo(function QueueRow({
             {song.artist}
           </AppText>
         </View>
-        <Pressable
-          onPressIn={drag}
-          hitSlop={8}
-          accessibilityRole="button"
-          accessibilityLabel="Arrastrar para mover"
-          style={styles.handle}>
-          <MaterialIcons name="drag-handle" size={sizes.icon} color={colors.textSecondary} />
-        </Pressable>
+        {draggable ? (
+          <Pressable
+            onPressIn={drag}
+            hitSlop={8}
+            accessibilityRole="button"
+            accessibilityLabel="Arrastrar para mover"
+            style={styles.handle}>
+            <MaterialIcons name="drag-handle" size={sizes.icon} color={colors.textSecondary} />
+          </Pressable>
+        ) : null}
       </Pressable>
     </ReanimatedSwipeable>
   );

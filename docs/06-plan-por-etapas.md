@@ -20,7 +20,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 2 | Biblioteca de música | ✅ Completada |
 | 3 | Reproductor | ✅ Completada |
 | 4 | Cola de reproducción | ✅ Completada |
-| 5 | Favoritos y listas | ⏳ Pendiente |
+| 5 | Favoritos y listas | ✅ Completada |
 | 6 | Búsqueda | ⏳ Pendiente |
 | 7 | Ajustes y personalización | ⏳ Pendiente |
 | 8 | Pulido visual y rendimiento | ⏳ Pendiente |
@@ -146,18 +146,25 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 5 — Favoritos y listas
+## Etapa 5 — Favoritos y listas ✅
 
-- [ ] Tablas `playlists`, `playlist_songs` y `favorites`
-- [ ] Botón ❤ en el reproductor y "Añadir a favoritos" / "Añadir a lista" en el menú ⋮
-- [ ] Lista fija "Favoritos"
-- [ ] Crear, renombrar y borrar listas
-- [ ] Añadir canciones (selección múltiple) y desde el menú ⋮
-- [ ] Reordenar y quitar canciones de una lista
-- [ ] Mosaico de 4 carátulas por lista
-- [ ] Estado de lista vacía
+- [x] Tablas `playlists`, `playlist_songs` y `favorites`
+- [x] Botón ❤ en el reproductor y "Añadir a favoritos" / "Añadir a lista" en el menú ⋮
+- [x] Lista fija "Favoritos"
+- [x] Crear, renombrar y borrar listas
+- [x] Añadir canciones (selección múltiple) y desde el menú ⋮
+- [x] Reordenar y quitar canciones de una lista
+- [x] Mosaico de 4 carátulas por lista
+- [x] Estado de lista vacía
 
 **Entregable y aceptación:** las listas y los favoritos se crean, se modifican y se conservan al cerrar la app.
+
+**Notas de la etapa:**
+- La pestaña Listas tiene su propia pila: índice, detalle (`/listas/[id]`, con `favoritos` como id fijo) y añadir canciones.
+- Añadir canciones tiene buscador y marca las que ya están en la lista.
+- Una canción no se repite en la misma lista. Borrar una lista pide confirmación.
+- Las canciones que ya no están en el teléfono no se muestran, pero se conservan.
+- Se reutiliza la fila arrastrable de la cola (`DraggableSongRow`).
 
 ---
 

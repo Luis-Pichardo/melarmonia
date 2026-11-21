@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Redirect, router } from 'expo-router';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
 import Animated, {
   interpolate,
@@ -17,6 +18,7 @@ import { Artwork } from '@/components/library/Artwork';
 import { PlayerControls } from '@/components/player/PlayerControls';
 import { SeekBar } from '@/components/player/SeekBar';
 import { next, previous, usePlayer } from '@/player/player';
+import { useIsFavorite, usePlaylists } from '@/store/playlists';
 import { openSongMenu } from '@/store/songMenu';
 import { radius, spacing, useTheme } from '@/theme';
 
@@ -32,6 +34,8 @@ export default function ReproductorScreen() {
   const { width } = useWindowDimensions();
   const current = usePlayer((s) => s.current);
   const sourceLabel = usePlayer((s) => s.sourceLabel);
+  const isFavorite = useIsFavorite(current?.id);
+  const toggleFavorite = usePlaylists((s) => s.toggleFavorite);
 
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
@@ -122,13 +126,28 @@ export default function ReproductorScreen() {
               </Animated.View>
             </View>
 
-            <View style={styles.info}>
-              <AppText variant="display" numberOfLines={2}>
-                {current.title}
-              </AppText>
-              <AppText variant="body" tone="secondary" numberOfLines={1}>
-                {current.artist}
-              </AppText>
+            <View style={styles.infoRow}>
+              <View style={styles.info}>
+                <AppText variant="display" numberOfLines={2}>
+                  {current.title}
+                </AppText>
+                <AppText variant="body" tone="secondary" numberOfLines={1}>
+                  {current.artist}
+                </AppText>
+              </View>
+              <Pressable
+                onPress={() => toggleFavorite(current)}
+                hitSlop={8}
+                accessibilityRole="button"
+                accessibilityLabel={isFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+                accessibilityState={{ selected: isFavorite }}
+                style={styles.heart}>
+                <MaterialIcons
+                  name={isFavorite ? 'favorite' : 'favorite-border'}
+                  size={30}
+                  color={isFavorite ? colors.favorite : colors.textSecondary}
+                />
+              </Pressable>
             </View>
 
             <SeekBar />
@@ -156,6 +175,8 @@ const styles = StyleSheet.create({
   sourceLabel: { color: '#FFFFFF', fontFamily: 'Inter_500Medium' },
   artworkWrap: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   artworkShadow: { elevation: 12 },
-  info: { gap: spacing.xxs },
+  infoRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  info: { flex: 1, gap: spacing.xxs },
+  heart: { width: 48, height: 48, alignItems: 'center', justifyContent: 'center' },
   bottomRow: { flexDirection: 'row', justifyContent: 'flex-end', marginTop: -spacing.xs },
 });

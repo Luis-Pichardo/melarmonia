@@ -8,6 +8,7 @@ import { MiniPlayer } from '@/components/player/MiniPlayer';
 import { onMediaLibraryChange } from '@/library/scanner';
 import { restorePlayback } from '@/player/player';
 import { useLibrary } from '@/store/library';
+import { usePlaylists } from '@/store/playlists';
 import { sizes, useTheme } from '@/theme';
 
 type IconName = ComponentProps<typeof MaterialIcons>['name'];
@@ -30,6 +31,7 @@ export default function TabsLayout() {
     if (!granted) return;
     const { init, rescan } = useLibrary.getState();
     init();
+    usePlaylists.getState().load();
 
     let timer: ReturnType<typeof setTimeout> | undefined;
     const debouncedRescan = () => {

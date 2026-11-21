@@ -44,7 +44,10 @@ melarmonia/
 │   │       │   ├── album/[id].tsx
 │   │       │   └── artista/[name].tsx
 │   │       ├── buscar.tsx
-│   │       ├── listas.tsx
+│   │       ├── listas/         # Pila de Listas
+│   │       │   ├── index.tsx
+│   │       │   ├── [id].tsx    # Detalle de una lista o de Favoritos
+│   │       │   └── agregar/[id].tsx
 │   │       └── ajustes.tsx
 │   ├── components/             # AppText, Screen, fila de canción, mini reproductor…
 │   ├── theme/                  # colors.ts, typography.ts, spacing.ts, ThemeProvider.tsx
@@ -52,7 +55,7 @@ melarmonia/
 │   ├── player/                 # Motor de reproducción y cola
 │   ├── library/                # Búsqueda de música, metadatos y listas derivadas
 │   ├── db/                     # SQLite: esquema y consultas
-│   ├── store/                  # Estado global (Zustand): biblioteca, avisos y menú ⋮
+│   ├── store/                  # Estado global (Zustand): biblioteca, listas, avisos y hojas
 │   └── utils/
 ├── assets/images/              # Icono, pantalla de carga
 ├── docs/                       # Esta documentación
@@ -110,10 +113,15 @@ Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_versio
 | date_added | INTEGER | |
 | modified_at | INTEGER | Para detectar archivos modificados |
 
-**playlists**: `id`, `name`, `created_at`, `updated_at`
-**playlist_songs**: `playlist_id`, `song_id`, `position`
-**favorites**: `song_id`, `added_at`
-**play_history**: `song_id`, `played_at` (para "Recientes" en el futuro)
+**favorites** (etapa 5): `song_id` (PK), `added_at`. Se muestran del más reciente al más antiguo.
+
+**playlists** (etapa 5): `id` (autoincremental), `name`, `created_at`, `updated_at`. Se ordenan por la última modificación.
+
+**playlist_songs** (etapa 5): `playlist_id`, `song_id`, `position`. Clave primaria (`playlist_id`, `song_id`): una canción no se repite en la misma lista. Al añadir, quitar o reordenar se reescribe el orden completo de la lista en una transacción.
+
+**play_history**: `song_id`, `played_at` (para "Recientes" en el futuro; aún no creada).
+
+> Si una canción de una lista o de favoritos ya no está en el teléfono, no se muestra, pero se conserva por si vuelve. Al reordenar, esas canciones quedan al final.
 
 ## 4.6 Ajustes guardados (MMKV)
 

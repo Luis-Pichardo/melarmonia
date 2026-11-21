@@ -8,7 +8,7 @@ import { AppText } from '@/components/AppText';
 import { EmptyState } from '@/components/EmptyState';
 import { IconButton } from '@/components/IconButton';
 import { SongRow } from '@/components/library/SongRow';
-import { QueueRow } from '@/components/player/QueueRow';
+import { DraggableSongRow } from '@/components/library/DraggableSongRow';
 import { pluralize } from '@/library/text';
 import type { Song } from '@/library/types';
 import { clearUpcoming, moveInQueue, removeFromQueue, skipTo, usePlayer } from '@/player/player';
@@ -50,11 +50,12 @@ export default function ColaScreen() {
 
   const renderItem = useCallback(
     ({ item }: { item: UpcomingItem }) => (
-      <QueueRow
+      <DraggableSongRow
         song={item.song}
         position={item.position}
         onPress={skipTo}
         onRemove={removeFromQueue}
+        removeLabel="Quitar de la cola"
       />
     ),
     [],

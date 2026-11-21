@@ -27,6 +27,26 @@ const MIGRATIONS: string[] = [
   CREATE INDEX IF NOT EXISTS idx_songs_album ON songs(album_id);
   CREATE INDEX IF NOT EXISTS idx_songs_artist ON songs(artist);
   `,
+  // 2 — Etapa 5: favoritos y listas de reproducción
+  `
+  CREATE TABLE IF NOT EXISTS favorites (
+    song_id   TEXT PRIMARY KEY NOT NULL,
+    added_at  INTEGER NOT NULL
+  );
+  CREATE TABLE IF NOT EXISTS playlists (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    name        TEXT NOT NULL,
+    created_at  INTEGER NOT NULL,
+    updated_at  INTEGER NOT NULL
+  );
+  CREATE TABLE IF NOT EXISTS playlist_songs (
+    playlist_id  INTEGER NOT NULL REFERENCES playlists(id) ON DELETE CASCADE,
+    song_id      TEXT NOT NULL,
+    position     INTEGER NOT NULL,
+    PRIMARY KEY (playlist_id, song_id)
+  );
+  CREATE INDEX IF NOT EXISTS idx_playlist_songs_order ON playlist_songs(playlist_id, position);
+  `,
 ];
 
 let db: SQLiteDatabase | null = null;
@@ -35,6 +55,7 @@ export function getDb(): SQLiteDatabase {
   if (db) return db;
   db = openDatabaseSync('melarmonia.db');
   db.execSync('PRAGMA journal_mode = WAL;');
+  db.execSync('PRAGMA foreign_keys = ON;');
   migrate(db);
   return db;
 }

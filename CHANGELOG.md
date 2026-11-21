@@ -5,6 +5,17 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.5.0] — Etapa 5: favoritos y listas
+
+### Añadido
+- Favoritos: botón ❤ en el reproductor y en el menú ⋮; lista fija **Favoritos**.
+- Listas de reproducción: crear, renombrar y borrar (con confirmación).
+- Detalle de lista: reproducir, aleatorio, reordenar arrastrando y quitar deslizando.
+- Pantalla **Añadir canciones** con buscador y selección múltiple.
+- **Añadir a lista…** desde el menú ⋮, con opción de crear una lista nueva.
+- Mosaico de 4 carátulas por lista.
+- Tablas `favorites`, `playlists` y `playlist_songs` (migración 2).
+
 ## [0.4.0] — Etapa 4: cola de reproducción
 
 ### Añadido
