@@ -5,6 +5,15 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.6.0] — Etapa 6: búsqueda
+
+### Añadido
+- Pestaña **Buscar** con resultados en vivo agrupados en Canciones, Artistas y Álbumes.
+- Búsqueda sin mayúsculas ni tildes, con varias palabras y orden por relevancia.
+- **Ver todos** en Canciones y Artistas.
+- Búsquedas recientes (las 10 últimas), con opción de quitar una o borrarlas todas.
+- Mensaje cuando no hay resultados.
+
 ## [0.5.0] — Etapa 5: favoritos y listas
 
 ### Añadido

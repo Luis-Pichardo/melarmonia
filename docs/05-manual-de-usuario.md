@@ -129,7 +129,13 @@ Toca ⋮ en una canción → **Añadir a lista…** → elige la lista, o toca *
 
 ## 7. Buscar
 
-Toca la pestaña **Buscar** y escribe. Los resultados aparecen mientras escribes, separados en **Canciones**, **Artistas** y **Álbumes**. Puedes buscar por título, artista o álbum.
+Toca la pestaña **Buscar** y escribe. Los resultados aparecen mientras escribes, separados en **Canciones**, **Artistas** y **Álbumes**.
+
+- Puedes buscar por título, artista o álbum, y combinar palabras: *juan café* encuentra «Ojalá que llueva café» de Juan Luis Guerra.
+- No importan las mayúsculas ni las tildes: *cancion* encuentra «Canción».
+- Toca **Ver todos** para ver más canciones o artistas.
+- Al tocar una canción suenan los resultados de la búsqueda, empezando por ella.
+- Tus **búsquedas recientes** aparecen cuando el campo está vacío. Toca una para repetirla, × para quitarla o **Borrar** para quitarlas todas.
 
 ## 8. Personalizar la app
 
