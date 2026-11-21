@@ -16,7 +16,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | Etapa | Nombre | Estado |
 |---|---|---|
 | 0 | Documentación | ✅ Completada |
-| 1 | Base del proyecto | ⏳ Pendiente |
+| 1 | Base del proyecto | ✅ Completada |
 | 2 | Biblioteca de música | ⏳ Pendiente |
 | 3 | Reproductor | ⏳ Pendiente |
 | 4 | Cola de reproducción | ⏳ Pendiente |
@@ -42,23 +42,29 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 1 — Base del proyecto
+## Etapa 1 — Base del proyecto ✅
 
 **Objetivo:** tener el proyecto funcionando en el teléfono, con la estructura, los temas y la navegación vacía.
 
-- [ ] Crear el proyecto Expo con TypeScript y Expo Router
-- [ ] Configurar el development build (`expo-dev-client`) y EAS Build (perfil `preview` para APK)
-- [ ] Crear la estructura de carpetas según la arquitectura
-- [ ] Configurar ESLint y Prettier
-- [ ] Añadir las fuentes Poppins e Inter
-- [ ] Crear `src/theme/`: tokens de colores (temas oscuro y claro), tipografía y espaciado de la guía de diseño
-- [ ] Crear el proveedor de tema (oscuro / claro / sistema) con el morado como color principal
-- [ ] Crear el menú inferior con las 4 pestañas vacías: Biblioteca, Buscar, Listas, Ajustes
-- [ ] Icono provisional y pantalla de carga (splash) con el degradado de marca
-- [ ] Identificador de la app: `com.luispichardo.melarmonia`
+- [x] Crear el proyecto Expo con TypeScript y Expo Router
+- [x] Configurar el development build (`expo-dev-client`) y EAS Build (perfil `preview` para APK)
+- [x] Crear la estructura de carpetas según la arquitectura
+- [x] Configurar ESLint y Prettier
+- [x] Añadir las fuentes Poppins e Inter
+- [x] Crear `src/theme/`: tokens de colores (temas oscuro y claro), tipografía y espaciado de la guía de diseño
+- [x] Crear el proveedor de tema (oscuro / claro / sistema) con el morado como color principal
+- [x] Crear el menú inferior con las 4 pestañas vacías: Biblioteca, Buscar, Listas, Ajustes
+- [x] Icono provisional y pantalla de carga (splash) con el degradado de marca
+- [x] Identificador de la app: `com.luispichardo.melarmonia`
 
 **Entregable:** un APK que se instala y abre, con las 4 pestañas y el tema oscuro morado.
 **Aceptación:** la app abre sin errores, se navega entre pestañas y los colores coinciden con la guía.
+
+**Notas de la etapa:**
+- Expo SDK 58. Las pantallas están en `src/app/` (la estructura recomendada por Expo).
+- Ajustes ya permite cambiar entre tema oscuro, claro y sistema, y muestra la paleta activa para comprobar los colores. El resto de los ajustes llega en la etapa 7.
+- El sistema de color personalizado (cálculo de tonos y contraste) ya está en `src/theme/colors.ts`; su pantalla llega en la etapa 7.
+- El APK se genera con `npm run build:apk` (requiere una cuenta gratuita de Expo).
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Melodía + Armonía.** Un reproductor de música para Android, sin anuncios, que reproduce la música que ya tienes descargada en tu teléfono.
 
-> Estado: **fase de documentación**. El código empieza cuando la documentación esté aprobada.
+> Estado: **en desarrollo**. Consulta el [plan por etapas](docs/06-plan-por-etapas.md) para ver por dónde vamos.
 
 ## Características (versión 1.0)
 
@@ -30,4 +30,16 @@
 
 ## Tecnología
 
-React Native + Expo (TypeScript) · `react-native-track-player` · Solo Android.
+React Native + Expo SDK 58 (TypeScript) · `react-native-track-player` · Solo Android.
+
+## Desarrollo
+
+```bash
+npm install            # instalar dependencias
+npm run build:dev      # APK de desarrollo (una vez, con EAS)
+npm start              # servidor de desarrollo
+npm run build:apk      # APK de prueba para instalar
+npm run typecheck && npm run lint
+```
+
+Más detalles en [Arquitectura técnica](docs/04-arquitectura.md#46-compilación-y-distribución).
