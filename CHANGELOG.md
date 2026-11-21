@@ -5,6 +5,20 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.1.0] — Etapa 1: base del proyecto
+
+### Añadido
+- Proyecto Expo SDK 58 con TypeScript y Expo Router.
+- Sistema de temas: colores de la guía de diseño (oscuro y claro), colores de marca preparados y cálculo del color personalizado.
+- Tipografía Poppins + Inter, escala de espaciado y bordes.
+- Ajustes guardados con MMKV (tema y color).
+- Menú inferior con 4 pestañas: Biblioteca, Buscar, Listas y Ajustes.
+- Ajustes: selector de tema y vista de la paleta actual.
+- Icono provisional y pantalla de carga con el degradado de marca.
+- Configuración de EAS Build para generar APK, ESLint y Prettier.
+
+## [0.0.0] — Etapa 0: documentación
+
 ### Añadido
 - Documentación inicial: visión general, guía de diseño, pantallas y flujos, arquitectura técnica y manual de usuario.
 - Plan del proyecto dividido en 10 etapas (`docs/06-plan-por-etapas.md`).

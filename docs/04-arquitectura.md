@@ -4,15 +4,17 @@
 
 | Área | Elección | Motivo |
 |---|---|---|
-| Framework | React Native + **Expo** (SDK más reciente) | Un solo código, compilación en la nube con EAS |
+| Framework | React Native + **Expo SDK 58** | Un solo código, compilación en la nube con EAS |
 | Lenguaje | **TypeScript** | Menos errores y mejor autocompletado |
-| Navegación | Expo Router | Navegación basada en archivos |
+| Navegación | Expo Router (`expo-router/js-tabs` para el menú inferior) | Navegación basada en archivos |
 | Audio | `react-native-track-player` | Segundo plano, notificación, pantalla de bloqueo, Bluetooth |
 | Lectura de la música | `expo-media-library` | Consulta el MediaStore de Android |
 | Metadatos y carátulas | Módulo nativo para leer etiquetas (por definir al implementar) | Título, artista, álbum y carátula |
 | Estado de la app | Zustand | Simple y ligero |
 | Base de datos local | `expo-sqlite` | Canciones, listas, favoritos, historial |
-| Ajustes | `react-native-mmkv` | Lectura instantánea al abrir la app |
+| Ajustes | `react-native-mmkv` v4 (con `react-native-nitro-modules`) | Lectura instantánea al abrir la app |
+| Iconos | `@expo/vector-icons` (MaterialIcons) | Incluidos con Expo |
+| Degradados | `expo-linear-gradient` | Degradado de marca |
 | Listas largas | `@shopify/flash-list` | Fluidez con miles de canciones |
 | Fuentes | `@expo-google-fonts/poppins`, `@expo-google-fonts/inter` | Tipografía de la guía de diseño |
 
@@ -22,27 +24,34 @@
 
 ```
 melarmonia/
-├── app/                    # Pantallas (Expo Router)
-│   ├── (tabs)/
-│   │   ├── biblioteca/
-│   │   ├── buscar.tsx
-│   │   ├── listas/
-│   │   └── ajustes.tsx
-│   ├── reproductor.tsx
-│   ├── cola.tsx
-│   └── bienvenida.tsx
 ├── src/
-│   ├── components/         # Fila de canción, mini reproductor, tarjetas…
-│   ├── theme/              # Colores, tipografía, espaciado (tokens de la guía)
-│   ├── player/             # Servicio de reproducción y control de la cola
-│   ├── library/            # Búsqueda de música y lectura de metadatos
-│   ├── db/                 # SQLite: esquema y consultas
-│   ├── store/              # Estado global (Zustand)
+│   ├── app/                    # Pantallas (Expo Router): cada archivo es una pantalla
+│   │   ├── _layout.tsx         # Raíz: fuentes, tema, pantalla de carga
+│   │   ├── (tabs)/
+│   │   │   ├── _layout.tsx     # Menú inferior con 4 pestañas
+│   │   │   ├── index.tsx       # Biblioteca
+│   │   │   ├── buscar.tsx
+│   │   │   ├── listas.tsx
+│   │   │   └── ajustes.tsx
+│   │   ├── reproductor.tsx     # (etapa 3)
+│   │   ├── cola.tsx            # (etapa 4)
+│   │   └── bienvenida.tsx      # (etapa 2)
+│   ├── components/             # AppText, Screen, fila de canción, mini reproductor…
+│   ├── theme/                  # colors.ts, typography.ts, spacing.ts, ThemeProvider.tsx
+│   ├── storage/                # Ajustes guardados (MMKV)
+│   ├── player/                 # Servicio de reproducción y cola (etapa 3)
+│   ├── library/                # Búsqueda de música y metadatos (etapa 2)
+│   ├── db/                     # SQLite: esquema y consultas (etapa 2)
+│   ├── store/                  # Estado global (Zustand)
 │   └── utils/
-├── assets/                 # Icono, fuentes, ilustraciones
-├── docs/                   # Esta documentación
+├── assets/images/              # Icono, pantalla de carga
+├── docs/                       # Esta documentación
+├── app.json                    # Configuración de Expo (nombre, paquete, icono, plugins)
+├── eas.json                    # Perfiles de compilación (development, preview, production)
 └── CHANGELOG.md
 ```
+
+> Las carpetas `android/` e `ios/` **no** se guardan en el repositorio: Expo las genera al compilar (Continuous Native Generation). Toda la configuración nativa va en `app.json`.
 
 ## 4.3 Base de datos
 
@@ -89,7 +98,15 @@ La app **no** pide el permiso de internet para nada propio.
 
 ## 4.6 Compilación y distribución
 
-- **Desarrollo:** `npx expo run:android` o un development build con EAS.
-- **APK para instalar:** perfil `preview` de EAS Build, que genera un `.apk` descargable.
+| Comando | Para qué |
+|---|---|
+| `npm install` | Instalar las dependencias |
+| `npm run build:dev` | APK de desarrollo (EAS), se instala una vez en el teléfono |
+| `npm start` | Servidor de desarrollo; el APK de desarrollo se conecta a él y recarga al guardar |
+| `npm run build:apk` | APK de prueba independiente (perfil `preview`) para instalar y compartir |
+| `npm run android` | Compilar en local (requiere Android Studio) |
+| `npm run typecheck` / `npm run lint` / `npm run format` | Revisar tipos, revisar el código y darle formato |
+
+- Las compilaciones con EAS necesitan una cuenta gratuita de Expo (`npx eas-cli@latest login`).
 - **Versionado:** SemVer (`1.0.0`). Cada versión se apunta en `CHANGELOG.md`.
-- **Identificador de la app:** `com.luispichardo.melarmonia` (por confirmar).
+- **Identificador de la app:** `com.luispichardo.melarmonia`.

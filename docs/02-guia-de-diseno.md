@@ -9,6 +9,8 @@
 
 ## 2.2 Colores
 
+> En el código, todos estos valores están en `src/theme/colors.ts`. Si cambias uno, cambia los dos.
+
 ### Color de marca (morado, valor por defecto)
 
 | Nombre (token) | Hex | Muestra | Uso |
@@ -110,20 +112,21 @@ Fuente: **Poppins** para títulos e **Inter** para el texto. Las dos son gratuit
 
 ## 2.5 Iconos
 
-- Librería: **Material Symbols Rounded** (incluida con Expo).
+- Librería: **MaterialIcons** de `@expo/vector-icons` (incluida con Expo).
 - Tamaño estándar: 24. En los controles del reproductor: 32. El de reproducir: 40.
 - Color: `textSecondary` en reposo, `accent` cuando están activos.
 
 | Acción | Icono |
 |---|---|
-| Reproducir / Pausa | `play_arrow` / `pause` |
-| Anterior / Siguiente | `skip_previous` / `skip_next` |
+| Reproducir / Pausa | `play-arrow` / `pause` |
+| Anterior / Siguiente | `skip-previous` / `skip-next` |
 | Aleatorio | `shuffle` |
-| Repetir todas / una | `repeat` / `repeat_one` |
-| Favorito | `favorite` / `favorite_border` |
-| Cola | `queue_music` |
+| Repetir todas / una | `repeat` / `repeat-one` |
+| Favorito | `favorite` / `favorite-border` |
+| Cola | `queue-music` |
+| Biblioteca | `library-music` |
 | Buscar | `search` |
-| Más opciones | `more_vert` |
+| Más opciones | `more-vert` |
 | Ajustes | `settings` |
 
 ## 2.6 Componentes
@@ -153,5 +156,6 @@ Fuente: **Poppins** para títulos e **Inter** para el texto. Las dos son gratuit
 ## 2.9 Icono de la app
 
 - Fondo con el degradado de marca (`#4A2575` → `#6B3FA0`).
-- En el centro, una nota musical blanca cuyo trazo forma una onda suave: la melodía y la armonía.
+- En el centro, una nota musical blanca (dos corcheas unidas) con una onda suave debajo: la melodía y la armonía.
+- La versión actual es **provisional** (etapa 1); el diseño final llega en la etapa 8.
 - Formato de icono adaptable de Android (fondo y figura por separado).
