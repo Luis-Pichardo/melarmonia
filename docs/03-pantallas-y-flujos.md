@@ -59,18 +59,33 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 
 ### Reproductor completo
 De arriba abajo:
-1. Botón ⌄ (cerrar) y "Reproduciendo desde: *Todas las canciones, nombre del álbum o del artista*". El botón ⋮ llega en la etapa 4.
+1. Botón ⌄ (cerrar), "Reproduciendo desde: *Todas las canciones, nombre del álbum o del artista*" y botón ⋮ (menú de la canción).
 2. Carátula grande. Se desliza a izquierda o derecha para cambiar de canción.
 3. Título (`display`) y artista. El botón ❤ llega en la etapa 5.
 4. Barra de progreso, con el tiempo transcurrido y el total.
 5. Controles: 🔀 · ⏮ · **▶/⏸** · ⏭ · 🔁. El aleatorio y la repetición activos se ven en `accent` con un punto debajo.
-6. El botón **Cola** llega en la etapa 4.
+6. Botón **Cola** abajo a la derecha.
 - Fondo: degradado de `primaryDark` a `background`.
 - Deslizar hacia abajo en cualquier parte cierra el reproductor.
 
 ### Cola
-- "Reproduciendo ahora" arriba y, debajo, "A continuación".
-- Se reordena arrastrando y se quitan canciones deslizándolas hacia un lado.
+- Se abre con el botón **Cola** del reproductor completo.
+- "Reproduciendo ahora" arriba (con el origen) y, debajo, "A continuación" con el número de canciones.
+- Se reordena manteniendo pulsada una canción o arrastrando desde ≡.
+- Se quitan canciones deslizándolas hacia un lado.
+- Tocar una canción salta directamente a ella.
+- **Vaciar** quita todo lo que queda por sonar.
+- La canción que suena no se puede mover ni quitar.
+
+### Menú ⋮ de una canción
+Hoja inferior con la carátula, el título, el artista y el álbum, y estas opciones:
+- **Reproducir a continuación**
+- **Añadir a la cola**
+- **Ir al álbum**
+- **Ir al artista**
+- *(Etapa 5)* Añadir a favoritos · Añadir a lista
+
+Está en todas las filas de canción y en el reproductor completo.
 
 ## 3.3 Flujos principales
 

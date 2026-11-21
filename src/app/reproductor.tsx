@@ -17,7 +17,8 @@ import { Artwork } from '@/components/library/Artwork';
 import { PlayerControls } from '@/components/player/PlayerControls';
 import { SeekBar } from '@/components/player/SeekBar';
 import { next, previous, usePlayer } from '@/player/player';
-import { radius, sizes, spacing, useTheme } from '@/theme';
+import { openSongMenu } from '@/store/songMenu';
+import { radius, spacing, useTheme } from '@/theme';
 
 const SWIPE_TRACK_THRESHOLD = 80;
 const SWIPE_CLOSE_THRESHOLD = 140;
@@ -102,7 +103,12 @@ export default function ReproductorScreen() {
                   {sourceLabel || 'Tu biblioteca'}
                 </AppText>
               </View>
-              <View style={styles.topBarSpacer} />
+              <IconButton
+                icon="more-vert"
+                label="Más opciones"
+                onPress={() => openSongMenu(current)}
+                color="#FFFFFF"
+              />
             </View>
 
             <View style={styles.artworkWrap}>
@@ -127,6 +133,13 @@ export default function ReproductorScreen() {
 
             <SeekBar />
             <PlayerControls />
+            <View style={styles.bottomRow}>
+              <IconButton
+                icon="queue-music"
+                label="Ver la cola"
+                onPress={() => router.push('/cola')}
+              />
+            </View>
           </SafeAreaView>
         </LinearGradient>
       </Animated.View>
@@ -136,13 +149,13 @@ export default function ReproductorScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  safe: { flex: 1, paddingHorizontal: spacing.lg, paddingBottom: spacing.xl, gap: spacing.md },
+  safe: { flex: 1, paddingHorizontal: spacing.lg, paddingBottom: spacing.md, gap: spacing.md },
   topBar: { flexDirection: 'row', alignItems: 'center', marginHorizontal: -spacing.sm },
   source: { flex: 1, alignItems: 'center' },
   sourceCaption: { color: '#FFFFFF', opacity: 0.75, letterSpacing: 1, fontSize: 10 },
   sourceLabel: { color: '#FFFFFF', fontFamily: 'Inter_500Medium' },
-  topBarSpacer: { width: sizes.minTouchTarget },
   artworkWrap: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   artworkShadow: { elevation: 12 },
   info: { gap: spacing.xxs },
+  bottomRow: { flexDirection: 'row', justifyContent: 'flex-end', marginTop: -spacing.xs },
 });

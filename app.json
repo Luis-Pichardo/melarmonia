@@ -2,7 +2,7 @@
   "expo": {
     "name": "Melarmonía",
     "slug": "melarmonia",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "melarmonia",
@@ -12,7 +12,7 @@
     ],
     "android": {
       "package": "com.luispichardo.melarmonia",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "backgroundColor": "#4A2575",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

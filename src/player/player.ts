@@ -30,6 +30,8 @@ export type { RepeatMode };
 interface PlayerState {
   /** Cola en el orden en que suena. */
   queue: Song[];
+  /** Clave única de cada elemento de la cola (una canción puede estar dos veces). */
+  keys: string[];
   /** Cola en su orden original (para quitar el aleatorio). */
   original: Song[];
   index: number;
@@ -46,6 +48,7 @@ interface PlayerState {
 
 export const usePlayer = create<PlayerState>(() => ({
   queue: [],
+  keys: [],
   original: [],
   index: 0,
   current: null,
@@ -60,6 +63,10 @@ export const usePlayer = create<PlayerState>(() => ({
 
 const set = usePlayer.setState;
 const get = usePlayer.getState;
+
+let keyCounter = 0;
+const newKey = () => `q${++keyCounter}`;
+const keysFor = (songs: Song[]) => songs.map(newKey);
 
 // --- Lista nativa -------------------------------------------------------------
 
@@ -252,6 +259,7 @@ export async function playSongs(
   consecutiveErrors = 0;
   set({
     queue,
+    keys: keysFor(queue),
     original: songs,
     index,
     current: queue[index],
@@ -332,13 +340,14 @@ export async function toggleShuffle() {
   }
   if (!shuffle) {
     const currentInOriginal = original.findIndex((s) => s.id === current.id);
-    set({ shuffle: true, queue: shuffledStartingWith(original, currentInOriginal), index: 0 });
+    const shuffledQueue = shuffledStartingWith(original, currentInOriginal);
+    set({ shuffle: true, queue: shuffledQueue, keys: keysFor(shuffledQueue), index: 0 });
   } else {
     const index = Math.max(
       0,
       original.findIndex((s) => s.id === current.id),
     );
-    set({ shuffle: false, queue: original, index });
+    set({ shuffle: false, queue: original, keys: keysFor(original), index });
   }
   await buildPlaylist({ positionSec, autoplay: playing });
   persist(true);
@@ -362,6 +371,7 @@ export function restorePlayback(songsById: Map<string, Song>) {
   const index = found >= 0 ? found : Math.min(saved.index, queue.length - 1);
   set({
     queue,
+    keys: keysFor(queue),
     original: original.length > 0 ? original : queue,
     index,
     current: queue[index],
@@ -372,4 +382,120 @@ export function restorePlayback(songsById: Map<string, Song>) {
     durationSec: queue[index].durationMs / 1000,
     playing: false,
   });
+}
+
+// --- Cola (etapa 4) -------------------------------------------------------------
+
+/** Tras cambiar la lista nativa, toma de ella la posición real de la canción actual. */
+function syncIndexFromNative() {
+  if (!playlist) return;
+  const index = playlist.currentIndex;
+  const { queue } = get();
+  if (index >= 0 && index < queue.length) set({ index, current: queue[index] });
+}
+
+/** Mantiene la cola original al día para poder quitar el aleatorio sin perder cambios. */
+function syncOriginal(change: (original: Song[]) => Song[]) {
+  const { shuffle, queue, original } = get();
+  set({ original: shuffle ? change(original) : queue });
+}
+
+/** "Reproducir a continuación": la canción sonará justo después de la actual. */
+export async function playNext(song: Song) {
+  const { queue, keys, index, current } = get();
+  if (queue.length === 0) {
+    await playSongs([song], 0, 'Cola');
+    return;
+  }
+  const at = index + 1;
+  set({
+    queue: [...queue.slice(0, at), song, ...queue.slice(at)],
+    keys: [...keys.slice(0, at), newKey(), ...keys.slice(at)],
+  });
+  syncOriginal((original) => {
+    const pos = current ? original.findIndex((s) => s.id === current.id) : -1;
+    return pos < 0
+      ? [...original, song]
+      : [...original.slice(0, pos + 1), song, ...original.slice(pos + 1)];
+  });
+  playlist?.insert({ uri: song.uri }, at);
+  syncIndexFromNative();
+  persist(true);
+  showToast(`«${song.title}» sonará a continuación`, 'success');
+}
+
+/** "Añadir a la cola": la canción irá al final. */
+export async function addToQueue(song: Song) {
+  const { queue, keys } = get();
+  if (queue.length === 0) {
+    await playSongs([song], 0, 'Cola');
+    return;
+  }
+  set({ queue: [...queue, song], keys: [...keys, newKey()] });
+  syncOriginal((original) => [...original, song]);
+  playlist?.add({ uri: song.uri });
+  persist(true);
+  showToast(`«${song.title}» añadida a la cola`, 'success');
+}
+
+/** Quita una canción de la cola. La que está sonando no se puede quitar. */
+export function removeFromQueue(position: number) {
+  const { queue, keys, index } = get();
+  if (position === index || position < 0 || position >= queue.length) return;
+  const removed = queue[position];
+  const nextIndex = position < index ? index - 1 : index;
+  const nextQueue = queue.filter((_, i) => i !== position);
+  set({
+    queue: nextQueue,
+    keys: keys.filter((_, i) => i !== position),
+    index: nextIndex,
+    current: nextQueue[nextIndex],
+  });
+  syncOriginal((original) => {
+    const pos = original.findIndex((s) => s.id === removed.id);
+    return pos < 0 ? original : original.filter((_, i) => i !== pos);
+  });
+  playlist?.remove(position);
+  syncIndexFromNative();
+  persist(true);
+}
+
+/** Mueve una canción dentro de la cola (arrastrar para reordenar). */
+export function moveInQueue(from: number, to: number) {
+  const { queue, keys, index } = get();
+  if (from === to || from < 0 || to < 0 || from >= queue.length || to >= queue.length) return;
+  // La canción que suena no se mueve: moverla en la lista nativa cortaría la reproducción.
+  if (from === index || to === index) return;
+  const nextQueue = [...queue];
+  const nextKeys = [...keys];
+  const [song] = nextQueue.splice(from, 1);
+  const [key] = nextKeys.splice(from, 1);
+  nextQueue.splice(to, 0, song);
+  nextKeys.splice(to, 0, key);
+
+  let nextIndex = index;
+  if (from === index) nextIndex = to;
+  else if (from < index && to >= index) nextIndex = index - 1;
+  else if (from > index && to <= index) nextIndex = index + 1;
+
+  set({ queue: nextQueue, keys: nextKeys, index: nextIndex, current: nextQueue[nextIndex] });
+  syncOriginal((original) => original);
+  if (playlist) {
+    playlist.remove(from);
+    playlist.insert({ uri: song.uri }, to);
+    syncIndexFromNative();
+  }
+  persist(true);
+}
+
+/** Vacía lo que queda por sonar, dejando la canción actual y las anteriores. */
+export function clearUpcoming() {
+  const { queue, keys, index } = get();
+  if (queue.length - index - 1 <= 0) return;
+  const kept = queue.slice(0, index + 1);
+  set({ queue: kept, keys: keys.slice(0, index + 1) });
+  syncOriginal(() => kept);
+  if (playlist) for (let i = queue.length - 1; i > index; i--) playlist.remove(i);
+  persist(true);
+  showToast('Cola vaciada');
 }

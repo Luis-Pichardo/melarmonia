@@ -95,9 +95,16 @@ Al abrir Melarmonía, el mini reproductor muestra la última canción que escuch
 
 La cola es la lista de lo que sonará a continuación. Ábrela desde el botón **Cola** del reproductor.
 
-- **Reordenar:** mantén pulsada una canción y arrástrala.
+- **Reordenar:** mantén pulsada una canción (o arrástrala desde ≡) y suéltala donde quieras.
 - **Quitar:** desliza la canción hacia un lado.
-- **Añadir:** en cualquier canción, toca ⋮ y luego **Reproducir a continuación** (será la siguiente) o **Añadir a la cola** (irá al final).
+- **Saltar a una canción:** tócala.
+- **Vaciar:** toca **Vaciar** para quitar todo lo que queda por sonar. La canción actual sigue sonando.
+- **Añadir:** en cualquier canción, toca ⋮ y luego **Reproducir a continuación** (será la siguiente) o **Añadir a la cola** (irá al final). Si no suena nada, empieza a sonar.
+
+> La canción que está sonando no se puede mover ni quitar.
+
+### El menú ⋮ de una canción
+Toca ⋮ en cualquier canción (o en el reproductor) para: reproducirla a continuación, añadirla a la cola, ir a su álbum o ir a su artista.
 
 ## 6. Favoritos y listas
 
