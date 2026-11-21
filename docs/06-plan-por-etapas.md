@@ -19,7 +19,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 1 | Base del proyecto | ✅ Completada |
 | 2 | Biblioteca de música | ✅ Completada |
 | 3 | Reproductor | ✅ Completada |
-| 4 | Cola de reproducción | ⏳ Pendiente |
+| 4 | Cola de reproducción | ✅ Completada |
 | 5 | Favoritos y listas | ⏳ Pendiente |
 | 6 | Búsqueda | ⏳ Pendiente |
 | 7 | Ajustes y personalización | ⏳ Pendiente |
@@ -126,23 +126,30 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 4 — Cola de reproducción
+## Etapa 4 — Cola de reproducción ✅
 
-- [ ] Pantalla de cola: "Reproduciendo ahora" y "A continuación"
-- [ ] Botón **Cola** y botón ⋮ en el reproductor completo
-- [ ] Reordenar arrastrando
-- [ ] Quitar canciones deslizando
-- [ ] Opciones "Reproducir a continuación" y "Añadir a la cola" en el menú ⋮
-- [ ] Hoja de opciones (⋮) reutilizable para las canciones
+- [x] Pantalla de cola: "Reproduciendo ahora" y "A continuación"
+- [x] Botón **Cola** y botón ⋮ en el reproductor completo
+- [x] Reordenar arrastrando
+- [x] Quitar canciones deslizando
+- [x] Opciones "Reproducir a continuación" y "Añadir a la cola" en el menú ⋮
+- [x] Hoja de opciones (⋮) reutilizable para las canciones
 
 **Entregable y aceptación:** se puede ver y modificar lo que va a sonar, y los cambios se reflejan al instante.
+
+**Notas de la etapa:**
+- Reordenar con `react-native-reorderable-list`; quitar deslizando con `ReanimatedSwipeable`.
+- Extras: tocar una canción de la cola salta a ella, y **Vaciar** quita lo que queda por sonar.
+- El menú ⋮ también incluye **Ir al álbum** e **Ir al artista**. Favoritos y listas se suman en la etapa 5.
+- Los cambios en la cola no cortan la canción que suena, que no se puede mover ni quitar.
+- Las hojas inferiores comparten el componente `BottomSheet`.
 
 ---
 
 ## Etapa 5 — Favoritos y listas
 
 - [ ] Tablas `playlists`, `playlist_songs` y `favorites`
-- [ ] Botón ❤ en el reproductor y en el menú ⋮
+- [ ] Botón ❤ en el reproductor y "Añadir a favoritos" / "Añadir a lista" en el menú ⋮
 - [ ] Lista fija "Favoritos"
 - [ ] Crear, renombrar y borrar listas
 - [ ] Añadir canciones (selección múltiple) y desde el menú ⋮

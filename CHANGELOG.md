@@ -5,6 +5,15 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.4.0] — Etapa 4: cola de reproducción
+
+### Añadido
+- Pantalla **Cola** (desde el reproductor): "Reproduciendo ahora" y "A continuación".
+- Reordenar arrastrando, quitar deslizando, tocar para saltar a una canción y **Vaciar**.
+- Menú ⋮ en todas las canciones y en el reproductor: **Reproducir a continuación**, **Añadir a la cola**, **Ir al álbum** e **Ir al artista**.
+- Botones ⋮ y **Cola** en el reproductor completo.
+- Componente de hoja inferior reutilizable.
+
 ## [0.3.0] — Etapa 3: reproductor
 
 ### Añadido

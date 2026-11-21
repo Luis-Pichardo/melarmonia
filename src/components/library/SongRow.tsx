@@ -7,6 +7,7 @@ import { NowPlayingBars } from '@/components/player/NowPlayingBars';
 import { formatDuration } from '@/library/text';
 import type { Song } from '@/library/types';
 import { usePlayer } from '@/player/player';
+import { openSongMenu } from '@/store/songMenu';
 import { radius, sizes, spacing, useTheme } from '@/theme';
 
 import { Artwork } from './Artwork';
@@ -72,7 +73,7 @@ export const SongRow = memo(function SongRow({
         {formatDuration(song.durationMs)}
       </AppText>
       <Pressable
-        onPress={onMorePress ? () => onMorePress(song) : undefined}
+        onPress={() => (onMorePress ?? openSongMenu)(song)}
         hitSlop={8}
         accessibilityRole="button"
         accessibilityLabel="Más opciones"

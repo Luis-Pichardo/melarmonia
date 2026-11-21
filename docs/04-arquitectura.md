@@ -9,7 +9,8 @@
 | Navegación | Expo Router (`expo-router/js-tabs` para el menú inferior) | Navegación basada en archivos |
 | Audio | `expo-audio` (`AudioPlaylist`) | Librería oficial de Expo: lista nativa, segundo plano, notificación, pantalla de bloqueo, auriculares y pausa al desconectarlos |
 | Barra de progreso | `@react-native-community/slider` | Control nativo de Android |
-| Gestos | `react-native-gesture-handler` + `react-native-reanimated` | Deslizar la carátula y cerrar el reproductor |
+| Gestos | `react-native-gesture-handler` + `react-native-reanimated` | Deslizar la carátula, cerrar el reproductor y deslizar para quitar de la cola |
+| Reordenar | `react-native-reorderable-list` | Arrastrar canciones en la cola |
 | Lectura de la música | `expo-media-library` (API `expo-media-library/legacy`) | Consulta el MediaStore de Android, con páginas de 500 audios |
 | Metadatos y carátulas | `@missingcore/react-native-metadata-retriever` | Lee las etiquetas con el lector nativo de Android (Media3): título, artista, álbum, pista, año y carátula |
 | Archivos | `expo-file-system` | Guarda las carátulas en la carpeta de la app |
@@ -35,7 +36,7 @@ melarmonia/
 │   │   ├── _layout.tsx         # Raíz: fuentes, tema, permiso, avisos
 │   │   ├── bienvenida.tsx      # Bienvenida y permiso de música
 │   │   ├── reproductor.tsx     # Reproductor completo
-│   │   ├── cola.tsx            # (etapa 4)
+│   │   ├── cola.tsx            # Cola de reproducción
 │   │   └── (tabs)/
 │   │       ├── _layout.tsx     # Menú inferior + mini reproductor
 │   │       ├── (biblioteca)/   # Pila de la Biblioteca
@@ -51,7 +52,7 @@ melarmonia/
 │   ├── player/                 # Motor de reproducción y cola
 │   ├── library/                # Búsqueda de música, metadatos y listas derivadas
 │   ├── db/                     # SQLite: esquema y consultas
-│   ├── store/                  # Estado global (Zustand): biblioteca y avisos
+│   ├── store/                  # Estado global (Zustand): biblioteca, avisos y menú ⋮
 │   └── utils/
 ├── assets/images/              # Icono, pantalla de carga
 ├── docs/                       # Esta documentación
@@ -88,6 +89,7 @@ Archivo: `src/player/player.ts`.
 - **Reanudar:** la cola, la canción, la posición, el aleatorio y la repetición se guardan cada 5 s, al pausar y al cambiar de canción. Al abrir la app se recuperan en pausa.
 - **Pantalla de bloqueo:** se activa con la primera reproducción y muestra título, artista, álbum y carátula, con los botones anterior y siguiente.
 - **Auriculares:** la pausa al desconectarlos la hace Android (`setHandleAudioBecomingNoisy`) y está siempre activa.
+- **Cola (etapa 4):** *Reproducir a continuación* inserta detrás de la actual, *Añadir a la cola* añade al final, y también se puede quitar, mover o vaciar lo que queda. Cada cambio se aplica a la vez en el estado y en la lista nativa (`insert`, `add`, `remove`), sin cortar la canción que suena; por eso la canción actual no se puede mover ni quitar. Cada elemento de la cola tiene una clave propia, porque una canción puede estar dos veces. Con el aleatorio activo, los cambios también se aplican a la cola original.
 
 ## 4.5 Base de datos
 
