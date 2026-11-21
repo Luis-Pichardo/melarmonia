@@ -10,10 +10,19 @@ interface IconButtonProps {
   onPress: () => void;
   active?: boolean;
   size?: number;
+  /** Color fijo (por ejemplo, blanco sobre el degradado del reproductor). */
+  color?: string;
 }
 
 /** Botón de icono con área táctil de 48 (guía de diseño, 2.4 y 2.5). */
-export function IconButton({ icon, label, onPress, active, size = sizes.icon }: IconButtonProps) {
+export function IconButton({
+  icon,
+  label,
+  onPress,
+  active,
+  size = sizes.icon,
+  color,
+}: IconButtonProps) {
   const { colors } = useTheme();
   return (
     <Pressable
@@ -25,7 +34,7 @@ export function IconButton({ icon, label, onPress, active, size = sizes.icon }: 
       <MaterialIcons
         name={icon}
         size={size}
-        color={active ? colors.accent : colors.textSecondary}
+        color={color ?? (active ? colors.accent : colors.textSecondary)}
       />
     </Pressable>
   );

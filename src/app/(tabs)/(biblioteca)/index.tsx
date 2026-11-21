@@ -12,11 +12,13 @@ import { ArtistRow } from '@/components/library/ArtistRow';
 import { LibraryTabs, type LibrarySection } from '@/components/library/LibraryTabs';
 import { ScanProgressBar } from '@/components/library/ScanProgressBar';
 import { SongRow } from '@/components/library/SongRow';
+import { PlayAllBar } from '@/components/player/PlayAllBar';
 import { SortSheet } from '@/components/library/SortSheet';
 import { Screen } from '@/components/Screen';
 import { buildLetterIndex, useAlbums, useArtists, useSortedSongs } from '@/library/selectors';
 import { pluralize } from '@/library/text';
 import type { Album, Artist, Song } from '@/library/types';
+import { playSongs } from '@/player/player';
 import { useLibrary } from '@/store/library';
 import { sizes, spacing, useTheme } from '@/theme';
 
@@ -105,7 +107,15 @@ function SongsList() {
     [songs, sort],
   );
 
-  const renderItem = useCallback(({ item }: { item: Song }) => <SongRow song={item} />, []);
+  const indexById = useMemo(() => new Map(songs.map((s, i) => [s.id, i])), [songs]);
+  const onPress = useCallback(
+    (song: Song) => playSongs(songs, indexById.get(song.id) ?? 0, 'Todas las canciones'),
+    [songs, indexById],
+  );
+  const renderItem = useCallback(
+    ({ item }: { item: Song }) => <SongRow song={item} onPress={onPress} />,
+    [onPress],
+  );
 
   return (
     <View style={styles.flex}>
@@ -115,9 +125,12 @@ function SongsList() {
         keyExtractor={(s) => s.id}
         renderItem={renderItem}
         ListHeaderComponent={
-          <AppText variant="caption" tone="secondary" style={styles.count}>
-            {pluralize(songs.length, 'canción', 'canciones')}
-          </AppText>
+          <View>
+            <PlayAllBar songs={songs} sourceLabel="Todas las canciones" />
+            <AppText variant="caption" tone="secondary" style={styles.count}>
+              {pluralize(songs.length, 'canción', 'canciones')}
+            </AppText>
+          </View>
         }
         contentContainerStyle={letters.length > 1 ? styles.listWithIndex : styles.listPadding}
         {...refresh}

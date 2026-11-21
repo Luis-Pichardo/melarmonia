@@ -64,7 +64,9 @@ En la pestaña **Biblioteca** está toda tu música, organizada en tres seccione
 ## 4. Reproducir música
 
 - **Toca una canción** para reproducirla. Las demás canciones de esa lista, álbum o artista se reproducirán a continuación.
-- **▶ Reproducir todo** o **🔀 Aleatorio** reproducen la sección completa.
+- **▶ Reproducir** o **🔀 Aleatorio** (arriba de Canciones, y en el detalle de cada álbum y artista) reproducen todo, en orden o mezclado.
+- La canción que suena se marca con un pequeño ecualizador animado y su título en color.
+- La primera vez que reproduces algo, Android puede pedirte permiso para mostrar **notificaciones**: permítelo para tener los controles en la notificación y en la pantalla de bloqueo.
 
 ### Mini reproductor
 Mientras suena música, en la parte inferior verás una barra con la canción actual. Desde ahí puedes pausar o continuar. **Tócala** para abrir el reproductor completo.
@@ -84,7 +86,10 @@ Mientras suena música, en la parte inferior verás una barra con la canción ac
 | Deslizar hacia abajo | Cerrar el reproductor |
 
 ### Con la pantalla apagada
-La música sigue sonando. Puedes controlarla desde la **notificación** o la **pantalla de bloqueo**.
+La música sigue sonando. Puedes controlarla desde la **notificación** o la **pantalla de bloqueo**, donde verás el título, el artista y la carátula.
+
+### Continuar donde te quedaste
+Al abrir Melarmonía, el mini reproductor muestra la última canción que escuchabas, en pausa y en el mismo punto. Toca ▶ para seguir.
 
 ## 5. La cola de reproducción
 
@@ -137,7 +142,7 @@ Para volver al original, elige **Morado**.
 ## 9. Auriculares y Bluetooth
 
 - Los **botones de los auriculares** funcionan: una pulsación pausa o reproduce, dos pasan a la siguiente y tres vuelven a la anterior (según el modelo).
-- Al **desconectar los auriculares**, la música se pausa para que no suene por el altavoz. Puedes cambiarlo en **Ajustes → Reproducción**.
+- Al **desconectar los auriculares** (de cable o Bluetooth), la música se pausa para que no suene por el altavoz.
 - En el coche, verás el título y la carátula en la pantalla si el sistema lo admite.
 
 ## 10. Preguntas frecuentes y problemas

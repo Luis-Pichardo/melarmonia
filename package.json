@@ -1,6 +1,6 @@
 {
   "name": "melarmonia",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "expo-router/entry",
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",
@@ -8,8 +8,10 @@
     "@expo/ui": "~58.0.29",
     "@expo/vector-icons": "^15.0.2",
     "@missingcore/react-native-metadata-retriever": "^3.2.1",
+    "@react-native-community/slider": "5.2.1",
     "@shopify/flash-list": "2.3.2",
     "expo": "~58.0.26",
+    "expo-audio": "~58.0.12",
     "expo-constants": "~58.0.16",
     "expo-dev-client": "~58.0.21",
     "expo-device": "~58.0.5",

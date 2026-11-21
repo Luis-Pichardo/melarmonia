@@ -1,6 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,9 +10,11 @@ import { EmptyState } from '@/components/EmptyState';
 import { AlbumCard } from '@/components/library/AlbumCard';
 import { Artwork } from '@/components/library/Artwork';
 import { SongRow } from '@/components/library/SongRow';
+import { PlayAllBar } from '@/components/player/PlayAllBar';
 import { useArtist } from '@/library/selectors';
 import { pluralize } from '@/library/text';
 import type { Album, Song } from '@/library/types';
+import { playSongs } from '@/player/player';
 import { radius, sizes, spacing, useTheme } from '@/theme';
 
 /** Detalle de artista: sus álbumes y sus canciones (pantallas y flujos, 3.2). */
@@ -25,9 +27,14 @@ export default function ArtistaScreen() {
     (album: Album) => router.push({ pathname: '/album/[id]', params: { id: album.id } }),
     [],
   );
+  const indexById = useMemo(() => new Map(songs.map((s, i) => [s.id, i])), [songs]);
+  const onPress = useCallback(
+    (song: Song) => playSongs(songs, indexById.get(song.id) ?? 0, name),
+    [songs, indexById, name],
+  );
   const renderItem = useCallback(
-    ({ item }: { item: Song }) => <SongRow song={item} subtitle={item.album} />,
-    [],
+    ({ item }: { item: Song }) => <SongRow song={item} subtitle={item.album} onPress={onPress} />,
+    [onPress],
   );
 
   if (songs.length === 0) {
@@ -65,6 +72,7 @@ export default function ArtistaScreen() {
                 {pluralize(songs.length, 'canción', 'canciones')}
               </AppText>
             </View>
+            <PlayAllBar songs={songs} sourceLabel={name} />
 
             <AppText variant="h2" style={styles.sectionTitle}>
               Álbumes

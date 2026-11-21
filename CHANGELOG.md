@@ -5,6 +5,27 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.3.0] — Etapa 3: reproductor
+
+### Añadido
+- Reproducción con `expo-audio`: en segundo plano, con controles en la notificación y en la pantalla de bloqueo (título, artista, álbum y carátula).
+- Botones de los auriculares y del Bluetooth; pausa al desconectarlos.
+- Tocar una canción la reproduce y deja el resto de la lista a continuación.
+- Botones **Reproducir** y **Aleatorio** en Canciones, álbumes y artistas.
+- Mini reproductor fijo sobre el menú inferior, con barra de progreso.
+- Reproductor completo: carátula grande, barra de progreso, aleatorio, repetir (desactivado / todas / una), deslizar la carátula para cambiar de canción y deslizar hacia abajo para cerrar.
+- Ecualizador animado en la canción que suena.
+- Aviso y salto a la siguiente si un archivo no se puede reproducir.
+- Continuar donde te quedaste: la última cola y la posición se recuperan al abrir la app.
+
+### Cambiado
+- `expo-audio` sustituye a `react-native-track-player` en la arquitectura.
+- La Biblioteca tiene su propia pila de pantallas, para que el menú inferior y el mini reproductor se vean en los detalles.
+- Se pide el permiso de notificaciones (Android 13+) y se bloquea el de micrófono.
+
+### Quitado del alcance de la 1.0
+- Transición suave entre canciones y reanudar al conectar el Bluetooth: pasan a ideas futuras.
+
 ## [0.2.0] — Etapa 2: biblioteca de música
 
 ### Añadido
