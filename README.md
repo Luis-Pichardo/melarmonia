@@ -25,6 +25,7 @@
 | [Pantallas y flujos](docs/03-pantallas-y-flujos.md) | Cada pantalla y cómo se navega entre ellas |
 | [Arquitectura técnica](docs/04-arquitectura.md) | Tecnologías, estructura de carpetas, datos y permisos |
 | [Manual de usuario](docs/05-manual-de-usuario.md) | Guía completa para quien usa la app |
+| [Plan por etapas](docs/06-plan-por-etapas.md) | Las etapas del proyecto, sus tareas y su estado |
 | [Registro de cambios](CHANGELOG.md) | Qué cambia en cada versión |
 
 ## Tecnología

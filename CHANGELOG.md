@@ -7,3 +7,4 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ### Añadido
 - Documentación inicial: visión general, guía de diseño, pantallas y flujos, arquitectura técnica y manual de usuario.
+- Plan del proyecto dividido en 10 etapas (`docs/06-plan-por-etapas.md`).
