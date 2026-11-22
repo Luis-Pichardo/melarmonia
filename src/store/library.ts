@@ -7,6 +7,7 @@ import {
   scanLibrary,
   type AudioPermission,
   type ScanProgress,
+  type ScanResult,
 } from '@/library/scanner';
 import { getLibrarySort, setLibrarySort, type LibrarySort } from '@/storage/settings';
 import type { Song } from '@/library/types';
@@ -21,6 +22,8 @@ interface LibraryState {
   songs: Song[];
   sort: LibrarySort;
   error: string | null;
+  /** Resultado de la última búsqueda de música (se muestra en Ajustes). */
+  lastScan: (ScanResult & { at: number }) | null;
 
   checkPermission: () => Promise<AudioPermission>;
   requestPermission: () => Promise<AudioPermission>;
@@ -40,6 +43,7 @@ export const useLibrary = create<LibraryState>((set, get) => ({
   songs: [],
   sort: getLibrarySort(),
   error: null,
+  lastScan: null,
 
   checkPermission: async () => {
     const permission = await getAudioPermission();
@@ -70,8 +74,8 @@ export const useLibrary = create<LibraryState>((set, get) => ({
     set({ status: 'scanning', refreshing: userInitiated, progress: null, error: null });
     scanInFlight = (async () => {
       try {
-        await scanLibrary((progress) => set({ progress }));
-        set({ songs: getAllSongs(), status: 'ready' });
+        const result = await scanLibrary((progress) => set({ progress }));
+        set({ songs: getAllSongs(), status: 'ready', lastScan: { ...result, at: Date.now() } });
       } catch (e) {
         set({ status: 'error', error: String(e) });
       } finally {

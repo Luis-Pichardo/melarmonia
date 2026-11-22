@@ -5,6 +5,17 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.7.0] — Etapa 7: ajustes y personalización
+
+### Añadido
+- Pantalla de **Ajustes** completa: Apariencia, Biblioteca, Reproducción y Acerca de.
+- Colores preparados (morado, azul, verde, rojo, naranja, rosa) con un toque.
+- **Color personalizado** con tono, saturación, luminosidad y código, vista previa en vivo y control de contraste.
+- **Carpetas excluidas**: añadir reglas, excluir carpetas con música con un toque y restaurar las predeterminadas.
+- **Duración mínima** de los audios (Todas / 15 / 30 / 60 s).
+- Buscar música de nuevo, con el total y la hora de la última búsqueda.
+- Versión, enlace al manual y pantalla de licencias.
+
 ## [0.6.0] — Etapa 6: búsqueda
 
 ### Añadido

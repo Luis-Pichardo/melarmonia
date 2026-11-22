@@ -66,8 +66,14 @@ const LIBRARY_KEYS = {
   librarySort: 'librarySort',
 } as const;
 
+export const MIN_DURATION_OPTIONS = [0, 15, 30, 60] as const;
+
 export function getMinDurationSec(): number {
   return storage.getNumber(LIBRARY_KEYS.minDurationSec) ?? 30;
+}
+
+export function setMinDurationSec(value: number): void {
+  storage.set(LIBRARY_KEYS.minDurationSec, value);
 }
 
 export function getExcludedFolders(): string[] {

@@ -49,10 +49,27 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 ### Ajustes
 | Sección | Opciones |
 |---|---|
-| Apariencia | Tema (oscuro / claro / sistema) · Color (preestablecidos o personalizado) |
-| Biblioteca | Buscar música de nuevo · Carpetas excluidas (por ejemplo, notas de voz de WhatsApp) · Ignorar audios de menos de 30 s |
-| Reproducción | Pausa al desconectar los auriculares (siempre activa, la gestiona Android) |
-| Acerca de | Versión · Manual de usuario · Licencias |
+| Apariencia | Tema (Oscuro / Claro / Sistema) · Color: 6 colores preparados en círculos con degradado y **Personalizado** |
+| Biblioteca | **Buscar música de nuevo** (con el total y la hora de la última búsqueda) · **Carpetas excluidas** (abre su pantalla) · **Duración mínima** (Todas / 15 s / 30 s / 60 s) |
+| Reproducción | Pausa al desconectar los auriculares (siempre activa) · Controles en la notificación (abre los ajustes del teléfono) |
+| Acerca de | Versión · Manual de usuario (se abre en el navegador) · Licencias |
+
+Los cambios de tema y color se aplican al instante en toda la app. Cambiar la duración mínima o las carpetas excluidas vuelve a buscar la música.
+
+### Color personalizado
+- Vista previa en vivo: banner con el degradado, botón de reproducir, texto destacado y barra de progreso.
+- Los tres tonos calculados (`primaryDark`, `primary`, `primaryLight`) con su código.
+- Controles de **Tono**, **Saturación** y **Luminosidad**, y campo **Código** (#RRGGBB).
+- Si el color es claro, avisa de que los textos sobre él serán oscuros.
+- Botones **Usar este color** y **Volver al morado**.
+
+### Carpetas excluidas
+- **Reglas**: textos que se buscan en la ruta de cada audio, cada uno con × para volver a mostrarlo.
+- **Añadir carpeta** (escribiendo un nombre o parte de la ruta) y **Restaurar las predeterminadas**.
+- **Carpetas con música**: cada carpeta con canciones y su número, con ⊘ para excluirla.
+
+### Licencias
+Lista del software de código abierto que usa la app, con su licencia. Tocar uno abre su página.
 
 ### Mini reproductor
 - Fijo sobre el menú inferior, también en los detalles de álbum y artista.
