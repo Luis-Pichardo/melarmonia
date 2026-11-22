@@ -1,6 +1,6 @@
 {
   "name": "melarmonia",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",
@@ -47,10 +47,13 @@
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.3.0",
     "eslint": "^9.39.5",
     "eslint-config-expo": "^58.0.4",
     "eslint-config-prettier": "^10.1.8",
+    "jest": "^30.5.2",
+    "jest-expo": "~58.0.15",
     "prettier": "^3.10.1",
     "typescript": "~6.0.3"
   },
@@ -61,7 +64,18 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "build:dev": "npx eas-cli@latest build --profile development --platform android",
-    "build:apk": "npx eas-cli@latest build --profile preview --platform android"
+    "build:apk": "npx eas-cli@latest build --profile preview --platform android",
+    "test": "jest",
+    "build:release": "npx eas-cli@latest build --profile production --platform android"
   },
-  "private": true
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "testMatch": [
+      "**/__tests__/**/*.test.ts"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|react-native-svg|pako)"
+    ]
+  }
 }
