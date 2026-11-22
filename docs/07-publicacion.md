@@ -46,9 +46,9 @@ Al terminar, EAS muestra un enlace para descargar el APK. Cámbiale el nombre a 
 ## 7.5 Publicar en GitHub
 
 1. Comprueba que `main` tiene la versión correcta y que las **Comprobaciones** de GitHub (tipos, estilo y pruebas) están en verde.
-2. En GitHub: **Releases** → borrador **Melarmonía 1.0.0** (o **Draft a new release**, con la etiqueta `v<versión>`).
-3. Arrastra el APK a *Attach binaries*.
-4. Revisa las notas (salen del `CHANGELOG.md`) y pulsa **Publish release**.
+2. En GitHub: **Releases** → **Draft a new release**. Escribe la etiqueta `v<versión>` (por ejemplo, `v1.0.0`), con destino `main`, y el título `Melarmonía <versión>`.
+3. Copia las notas de `docs/notas/<versión>.md` (las de la 1.0.0 ya están escritas).
+4. Arrastra el APK a *Attach binaries* y pulsa **Publish release**.
 5. Comparte el enlace de la publicación: quien lo abra desde el teléfono descarga el APK y lo instala siguiendo el [manual](05-manual-de-usuario.md#1-instalación).
 
 ## 7.6 Lista antes de publicar

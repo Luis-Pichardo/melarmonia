@@ -240,7 +240,7 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 - [x] Revisión final de toda la documentación
 - [x] Guía de publicación: APK, clave de firma, versiones y GitHub Releases ([Publicación](07-publicacion.md))
 - [x] Versión `1.0.0` (`versionCode` 10) en la app y en el `CHANGELOG.md`
-- [x] Borrador de la publicación 1.0.0 en GitHub, con las notas
+- [x] Notas de la publicación 1.0.0 listas para copiar ([docs/notas/1.0.0.md](notas/1.0.0.md))
 
 **Pendiente de Luis (necesita el teléfono):**
 - [ ] Generar el APK con `npm run build:release` y crear la clave de firma (EAS)
@@ -248,6 +248,6 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 - [ ] Pruebas en el teléfono siguiendo la lista (idealmente Android 13+ y Android 12 o inferior)
 - [ ] Corrección de errores encontrados (Claude, con la lista de problemas)
 - [ ] Capturas de pantalla para el manual (Claude las añade al manual)
-- [ ] Subir el APK al borrador de la publicación y publicarlo
+- [ ] Crear la publicación `v1.0.0` en GitHub con esas notas, subir el APK y publicarla
 
 **Entregable:** `Melarmonia-1.0.0.apk` publicado y listo para compartir.
