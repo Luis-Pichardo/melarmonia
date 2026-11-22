@@ -182,9 +182,13 @@ Se bloquean de forma expresa los permisos que añaden otras librerías y que no 
 | `npm run build:dev` | APK de desarrollo (EAS), se instala una vez en el teléfono |
 | `npm start` | Servidor de desarrollo; el APK de desarrollo se conecta a él y recarga al guardar |
 | `npm run build:apk` | APK de prueba independiente (perfil `preview`) para instalar y compartir |
+| `npm run build:release` | APK final para publicar (perfil `production`); ver [Publicación](07-publicacion.md) |
 | `npm run android` | Compilar en local (requiere Android Studio) |
 | `npm run typecheck` / `npm run lint` / `npm run format` | Revisar tipos, revisar el código y darle formato |
+| `npm test` | Pruebas automáticas (Jest con `jest-expo`), ver [Pruebas](08-pruebas.md) |
 
 - Las compilaciones con EAS necesitan una cuenta gratuita de Expo (`npx eas-cli@latest login`).
 - **Versionado:** SemVer (`1.0.0`). Cada versión se apunta en `CHANGELOG.md`.
 - **Identificador de la app:** `com.luispichardo.melarmonia`.
+- **Firma:** la clave la guarda EAS en la cuenta de Expo; hay que tener una copia de seguridad fuera del repositorio ([Publicación, 7.2](07-publicacion.md#72-la-clave-de-firma)).
+- **Comprobaciones automáticas:** `.github/workflows/ci.yml` ejecuta tipos, estilo y pruebas en cada pull request y en `main`.

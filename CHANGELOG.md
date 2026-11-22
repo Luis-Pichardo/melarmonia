@@ -5,6 +5,24 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [1.0.0] — Primera versión
+
+Primera versión completa de Melarmonía: un reproductor de música para Android, sin anuncios, sin cuentas y sin internet.
+
+### Incluye
+- Biblioteca automática con canciones, artistas y álbumes, carátulas, índice A–Z y actualización automática.
+- Reproducción en segundo plano, con controles en la notificación, la pantalla de bloqueo y los auriculares.
+- Mini reproductor y reproductor completo con aleatorio, repetir, gestos y fondo con el color de la carátula.
+- Cola editable, favoritos y listas de reproducción.
+- Búsqueda en vivo y búsquedas recientes.
+- Tema oscuro, claro o del sistema; 6 colores y color personalizado.
+- Carpetas excluidas y duración mínima configurables.
+- Logo propio de Melarmonía.
+
+### Añadido en esta versión
+- Pruebas automáticas y comprobaciones en GitHub (tipos, estilo y pruebas).
+- Guías de publicación y de pruebas en el teléfono.
+
 ## [0.8.0] — Etapa 8: pulido visual y rendimiento
 
 ### Añadido

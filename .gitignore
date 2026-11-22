@@ -45,3 +45,4 @@ example
 # Carpetas nativas generadas (Continuous Native Generation)
 /android
 /ios
+*.keystore

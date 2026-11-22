@@ -27,7 +27,7 @@ Mini reproductor (siempre visible si hay música) ──► Reproductor completo
 
 ### Biblioteca
 - Título "Biblioteca" y tres pestañas superiores: **Canciones · Artistas · Álbumes**.
-- **Canciones**: lista en orden alfabético, con letras rápidas a la derecha para saltar (A–Z) y el total de canciones arriba. Los botones **▶ Reproducir todo** y **🔀 Aleatorio** se añaden en la etapa 3.
+- **Canciones**: lista en orden alfabético, con letras rápidas a la derecha para saltar (A–Z) con los botones **▶ Reproducir** y **🔀 Aleatorio** y el total de canciones arriba.
 - **Artistas**: lista de artistas con letras rápidas A–Z. Al tocar uno se abre su detalle: sus álbumes en una fila horizontal y sus canciones.
 - **Álbumes**: cuadrícula de 2 columnas. Al tocar uno se abre su detalle: carátula grande, año, número de canciones, duración total y las canciones con su número de pista. Tocar el nombre del artista abre su detalle.
 - Orden de las canciones con el botón ⇅: por nombre, por artista, añadidas recientemente o por duración. La app recuerda el orden elegido.

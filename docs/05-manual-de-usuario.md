@@ -2,7 +2,7 @@
 
 ¡Bienvenido a **Melarmonía**! Este manual explica cómo instalar la app y sacarle todo el partido.
 
-> 📸 Las capturas de pantalla se añadirán cuando la app esté lista.
+> 📸 Las capturas de pantalla se añadirán tras las pruebas en el teléfono (ver [Pruebas, 8.3](08-pruebas.md#83-capturas-para-el-manual)).
 
 ---
 

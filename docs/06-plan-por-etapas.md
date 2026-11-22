@@ -24,7 +24,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 6 | Búsqueda | ✅ Completada |
 | 7 | Ajustes y personalización | ✅ Completada |
 | 8 | Pulido visual y rendimiento | ✅ Completada |
-| 9 | Pruebas y lanzamiento 1.0 | ⏳ Pendiente |
+| 9 | Pruebas y lanzamiento 1.0 | 🚧 En curso: faltan las pruebas en el teléfono |
 
 Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
@@ -232,14 +232,22 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 9 — Pruebas y lanzamiento 1.0
+## Etapa 9 — Pruebas y lanzamiento 1.0 🚧
 
-- [ ] Pruebas en varios teléfonos y versiones de Android (8, 11, 13, 14 o superior)
-- [ ] Corrección de errores encontrados
-- [ ] Capturas de pantalla añadidas al manual de usuario
-- [ ] Revisión final de toda la documentación
-- [ ] Clave de firma del APK (guardada fuera del repositorio)
-- [ ] Versión `1.0.0` en la app y en el `CHANGELOG.md`
-- [ ] Publicación en GitHub Releases con el APK descargable
+**Hecho por Claude:**
+- [x] Pruebas automáticas (25 pruebas con Jest) y comprobaciones en GitHub en cada pull request
+- [x] Lista de pruebas en el teléfono ([Pruebas](08-pruebas.md))
+- [x] Revisión final de toda la documentación
+- [x] Guía de publicación: APK, clave de firma, versiones y GitHub Releases ([Publicación](07-publicacion.md))
+- [x] Versión `1.0.0` (`versionCode` 10) en la app y en el `CHANGELOG.md`
+- [x] Notas de la publicación 1.0.0 listas para copiar ([docs/notas/1.0.0.md](notas/1.0.0.md))
+
+**Pendiente de Luis (necesita el teléfono):**
+- [ ] Generar el APK con `npm run build:release` y crear la clave de firma (EAS)
+- [ ] Copia de seguridad de la clave de firma, fuera del repositorio
+- [ ] Pruebas en el teléfono siguiendo la lista (idealmente Android 13+ y Android 12 o inferior)
+- [ ] Corrección de errores encontrados (Claude, con la lista de problemas)
+- [ ] Capturas de pantalla para el manual (Claude las añade al manual)
+- [ ] Crear la publicación `v1.0.0` en GitHub con esas notas, subir el APK y publicarla
 
 **Entregable:** `Melarmonia-1.0.0.apk` publicado y listo para compartir.
