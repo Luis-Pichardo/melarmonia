@@ -201,3 +201,13 @@ export function resolveBrand(choice: AccentChoice, customHex?: string): BrandCol
   if (choice !== 'custom') return accentPresets[choice];
   return accentPresets[DEFAULT_ACCENT];
 }
+
+/** Para el selector de color: tono 0–360, saturación y luminosidad 0–100. */
+export function hexToHsl(hex: string): { h: number; s: number; l: number } {
+  const [h, s, l] = rgbToHsl(...hexToRgb(hex));
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+}
+
+export function hslToHex(h: number, s: number, l: number): string {
+  return rgbToHex(...hslToRgb((((h % 360) + 360) % 360) / 360, s / 100, l / 100));
+}

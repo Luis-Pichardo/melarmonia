@@ -48,7 +48,11 @@ melarmonia/
 │   │       │   ├── index.tsx
 │   │       │   ├── [id].tsx    # Detalle de una lista o de Favoritos
 │   │       │   └── agregar/[id].tsx
-│   │       └── ajustes.tsx
+│   │       └── ajustes/        # Pila de Ajustes
+│   │           ├── index.tsx
+│   │           ├── color.tsx   # Color personalizado
+│   │           ├── carpetas.tsx
+│   │           └── licencias.tsx
 │   ├── components/             # AppText, Screen, fila de canción, mini reproductor…
 │   ├── theme/                  # colors.ts, typography.ts, spacing.ts, ThemeProvider.tsx
 │   ├── storage/                # Ajustes y última reproducción (MMKV)
@@ -136,7 +140,7 @@ Archivos: `src/db/`. Las migraciones se aplican en orden con `PRAGMA user_versio
 | `accentCustom` | hex | — |
 | `excludedFolders` | lista de textos que se buscan en la ruta | WhatsApp Voice Notes, WhatsApp Audio, Telegram Audio, Recordings, Call recordings, Notifications, Ringtones, Alarms |
 | `librarySort` | `title` / `artist` / `dateAdded` / `duration` | `title` |
-| `minDurationSec` | número | `30` |
+| `minDurationSec` | `0` / `15` / `30` / `60` | `30` |
 | `lastPlayback` | JSON: cola, cola original, canción, posición, aleatorio, repetir, origen | Para reanudar donde se quedó |
 | `askedNotifications` | booleano | Para pedir el permiso de notificaciones una sola vez |
 | `recentSearches` | lista de textos (máx. 10) | `[]` |

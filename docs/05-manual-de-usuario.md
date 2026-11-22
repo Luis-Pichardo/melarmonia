@@ -14,7 +14,7 @@
 5. [La cola de reproducción](#5-la-cola-de-reproducción)
 6. [Favoritos y listas](#6-favoritos-y-listas)
 7. [Buscar](#7-buscar)
-8. [Personalizar la app](#8-personalizar-la-app)
+8. [Personalizar la app y ajustes](#8-personalizar-la-app)
 9. [Auriculares y Bluetooth](#9-auriculares-y-bluetooth)
 10. [Preguntas frecuentes y problemas](#10-preguntas-frecuentes-y-problemas)
 
@@ -55,7 +55,7 @@ En la pestaña **Biblioteca** está toda tu música, organizada en tres seccione
 
 **¿Descargaste canciones nuevas?** Desliza la lista hacia abajo para actualizarla, o ve a **Ajustes → Biblioteca → Buscar música de nuevo**.
 
-**¿Aparecen audios que no son música (notas de voz, tonos)?** Melarmonía ya oculta los audios de menos de 30 segundos y los de estas carpetas: notas de voz y audios de WhatsApp y Telegram, grabaciones, grabaciones de llamadas, notificaciones, tonos y alarmas. Si aun así aparece alguno, ve a **Ajustes → Biblioteca → Carpetas excluidas** y añade esa carpeta *(disponible a partir de la etapa 7)*.
+**¿Aparecen audios que no son música (notas de voz, tonos)?** Melarmonía ya oculta los audios de menos de 30 segundos y los de estas carpetas: notas de voz y audios de WhatsApp y Telegram, grabaciones, grabaciones de llamadas, notificaciones, tonos y alarmas. Si aun así aparece alguno, ve a **Ajustes → Biblioteca → Carpetas excluidas** y exclúyela (sección 8.1).
 
 **Detalle de un álbum:** muestra la carátula grande, el año, el número de canciones, la duración total y las canciones en su orden. Toca el nombre del artista para ver todo lo suyo.
 
@@ -148,10 +148,33 @@ Ve a **Ajustes → Apariencia**.
 
 ### Color
 El morado es el color de Melarmonía, pero puedes cambiarlo:
-- Elige uno de los colores preparados: **Morado, Azul, Verde, Rojo, Naranja o Rosa**.
-- O toca **Personalizado** y elige cualquier color con el selector. La app ajusta sola los tonos para que todo combine y se lea bien.
+- Toca uno de los colores preparados: **Morado, Azul, Verde, Rojo, Naranja o Rosa**. La app cambia al momento.
+- O toca **Personalizado**:
+  1. Mueve **Tono**, **Saturación** y **Luminosidad** hasta que te guste, o escribe el **código** del color (por ejemplo, `#1DB954`).
+  2. Arriba verás cómo queda: el degradado, el botón de reproducir y el texto destacado.
+  3. Toca **Usar este color**.
 
-Para volver al original, elige **Morado**.
+La app calcula sola un tono más oscuro y otro más claro para que todo combine. Si eliges un color muy claro, los textos y los iconos encima se ponen oscuros para que se lean bien.
+
+Para volver al original, elige **Morado** o toca **Volver al morado** en la pantalla del color personalizado.
+
+## 8.1 Ajustes de la biblioteca
+
+Ve a **Ajustes → Biblioteca**.
+
+- **Buscar música de nuevo:** vuelve a revisar el teléfono. Debajo verás cuántas canciones hay y cuándo se buscó por última vez.
+- **Duración mínima:** los audios más cortos no aparecen. Elige **Todas**, **15 s**, **30 s** (predeterminado) o **60 s**.
+- **Carpetas excluidas:** aquí decides qué carpetas no se muestran.
+  - En **Carpetas con música** verás cada carpeta con canciones. Toca ⊘ para dejar de mostrarla.
+  - **Añadir carpeta** te deja escribir un nombre o una parte de la ruta (por ejemplo, `Grabaciones`).
+  - Toca × en una regla para volver a mostrar esa carpeta.
+  - **Restaurar las predeterminadas** vuelve a la lista inicial (notas de voz de WhatsApp y Telegram, grabaciones, tonos…).
+
+> Excluir una carpeta **no** borra nada del teléfono: solo deja de mostrarse en Melarmonía.
+
+## 8.2 Acerca de
+
+En **Ajustes → Acerca de** verás la versión de la app, un enlace a este manual y las licencias del software que usa Melarmonía.
 
 ## 9. Auriculares y Bluetooth
 
@@ -162,7 +185,7 @@ Para volver al original, elige **Morado**.
 ## 10. Preguntas frecuentes y problemas
 
 **No aparece mi música.**
-Comprueba que diste el permiso de *Música y audio* (sección 2). Después, desliza hacia abajo en la Biblioteca para buscar de nuevo. Revisa también que la canción dure más de 30 segundos y que no esté en una carpeta excluida.
+Comprueba que diste el permiso de *Música y audio* (sección 2). Después, desliza hacia abajo en la Biblioteca o ve a **Ajustes → Buscar música de nuevo**. Revisa también la **duración mínima** y las **carpetas excluidas** (sección 8.1).
 
 **La primera vez tarda en cargar.**
 Es normal: la app lee los datos y las carátulas de todas tus canciones. Las siguientes veces solo revisa lo nuevo y es casi instantáneo.

@@ -69,6 +69,8 @@ En **Ajustes → Apariencia → Color**, el usuario puede elegir:
 | Rosa | `#C9468F` | `#902E64` | `#E883BA` |
 | Personalizado | Elegido con un selector | Calculado | Calculado |
 
+**Selector del color personalizado:** controles de tono (0–360), saturación y luminosidad (0–100), y campo para el código `#RRGGBB`. El código escrito se conserva exacto. Las conversiones están en `src/theme/colors.ts` (`hexToHsl`, `hslToHex`).
+
 **Reglas para el color personalizado:**
 - `primaryDark` = el color elegido con un 30 % menos de luminosidad.
 - `primaryLight` = el color elegido con un 25 % más de luminosidad.

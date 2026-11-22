@@ -22,7 +22,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 4 | Cola de reproducción | ✅ Completada |
 | 5 | Favoritos y listas | ✅ Completada |
 | 6 | Búsqueda | ✅ Completada |
-| 7 | Ajustes y personalización | ⏳ Pendiente |
+| 7 | Ajustes y personalización | ✅ Completada |
 | 8 | Pulido visual y rendimiento | ⏳ Pendiente |
 | 9 | Pruebas y lanzamiento 1.0 | ⏳ Pendiente |
 
@@ -186,18 +186,25 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 7 — Ajustes y personalización
+## Etapa 7 — Ajustes y personalización ✅
 
-- [ ] Pantalla de ajustes con secciones
-- [ ] Tema: oscuro, claro o según el sistema
-- [ ] Colores preparados: morado, azul, verde, rojo, naranja y rosa
-- [ ] Color personalizado con selector, cálculo de los tonos oscuro y claro y control de contraste
-- [ ] Biblioteca: buscar música de nuevo, carpetas excluidas y duración mínima
-- [ ] Reproducción: información sobre la pausa al desconectar los auriculares (siempre activa)
-- [ ] Acerca de: versión, enlace al manual y licencias
-- [ ] Guardado de ajustes con MMKV
+- [x] Pantalla de ajustes con secciones
+- [x] Tema: oscuro, claro o según el sistema
+- [x] Colores preparados: morado, azul, verde, rojo, naranja y rosa
+- [x] Color personalizado con selector, cálculo de los tonos oscuro y claro y control de contraste
+- [x] Biblioteca: buscar música de nuevo, carpetas excluidas y duración mínima
+- [x] Reproducción: información sobre la pausa al desconectar los auriculares (siempre activa)
+- [x] Acerca de: versión, enlace al manual y licencias
+- [x] Guardado de ajustes con MMKV
 
 **Entregable y aceptación:** el tema y el color cambian al instante en toda la app y se conservan al reabrirla.
+
+**Notas de la etapa:**
+- Selector de color propio con tono, saturación, luminosidad y código, y vista previa en vivo. No hace falta otra librería: usa el slider que ya teníamos.
+- Carpetas excluidas: además de escribir reglas, se puede excluir con un toque cualquier carpeta que tenga música.
+- Duración mínima elegible: Todas, 15, 30 o 60 s.
+- El manual se abre en GitHub (el repositorio es público).
+- Cambiar las exclusiones o la duración vuelve a buscar la música.
 
 ---
 
