@@ -17,5 +17,8 @@ export function AppText({ variant = 'body', tone = 'primary', style, ...rest }: 
       : tone === 'accent'
         ? colors.accent
         : colors.textPrimary;
-  return <Text style={[typography[variant], { color }, style]} {...rest} />;
+  // Respeta el tamaño de letra del sistema hasta 1,4×, para que las filas no se corten.
+  return (
+    <Text maxFontSizeMultiplier={1.4} style={[typography[variant], { color }, style]} {...rest} />
+  );
 }

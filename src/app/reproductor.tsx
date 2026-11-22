@@ -17,6 +17,7 @@ import { IconButton } from '@/components/IconButton';
 import { Artwork } from '@/components/library/Artwork';
 import { PlayerControls } from '@/components/player/PlayerControls';
 import { SeekBar } from '@/components/player/SeekBar';
+import { backgroundTone, useArtworkColor } from '@/player/artworkColor';
 import { next, previous, usePlayer } from '@/player/player';
 import { useIsFavorite, usePlaylists } from '@/store/playlists';
 import { openSongMenu } from '@/store/songMenu';
@@ -35,6 +36,8 @@ export default function ReproductorScreen() {
   const current = usePlayer((s) => s.current);
   const sourceLabel = usePlayer((s) => s.sourceLabel);
   const isFavorite = useIsFavorite(current?.id);
+  const artworkColor = useArtworkColor(current?.artworkPath);
+  const topColor = artworkColor ? backgroundTone(artworkColor, mode) : colors.primaryDark;
   const toggleFavorite = usePlaylists((s) => s.toggleFavorite);
 
   const translateX = useSharedValue(0);
@@ -87,8 +90,8 @@ export default function ReproductorScreen() {
     <GestureDetector gesture={pan}>
       <Animated.View style={[styles.flex, screenStyle]}>
         <LinearGradient
-          colors={[colors.primaryDark, colors.background]}
-          locations={[0, mode === 'dark' ? 0.7 : 0.55]}
+          colors={[topColor, colors.primaryDark, colors.background]}
+          locations={[0, 0.35, mode === 'dark' ? 0.8 : 0.65]}
           style={styles.flex}>
           <SafeAreaView style={styles.safe}>
             <View style={styles.topBar}>

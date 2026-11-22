@@ -158,7 +158,8 @@ async function buildPlaylist(options: { positionSec?: number; autoplay: boolean 
   const created = createAudioPlaylist({
     sources: queue.map((s) => ({ uri: s.uri })),
     loop: loopFor(repeat),
-    updateInterval: 500,
+    // 1 s basta para la barra de progreso y despierta menos la app en segundo plano.
+    updateInterval: 1000,
   });
   playlist = created;
   subscriptions = [

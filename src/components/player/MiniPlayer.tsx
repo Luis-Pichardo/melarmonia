@@ -1,6 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { AppText } from '@/components/AppText';
 import { Artwork } from '@/components/library/Artwork';
@@ -23,7 +24,8 @@ export function MiniPlayer() {
   const progress = duration > 0 ? Math.min(1, position / duration) : 0;
 
   return (
-    <View
+    <Animated.View
+      entering={FadeInDown.duration(250)}
       style={[styles.root, { backgroundColor: colors.surface, borderTopColor: colors.divider }]}>
       <Pressable
         onPress={() => router.push('/reproductor')}
@@ -64,7 +66,7 @@ export function MiniPlayer() {
           style={[styles.fill, { width: `${progress * 100}%`, backgroundColor: colors.primary }]}
         />
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
