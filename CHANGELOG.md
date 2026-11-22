@@ -5,6 +5,19 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [0.8.0] — Etapa 8: pulido visual y rendimiento
+
+### Añadido
+- El fondo del reproductor toma el color de la carátula.
+- Logo de Melarmonía: una "m" hecha de la melodía, con el eco de la armonía y una nota musical. Se usa en el icono (adaptable y monocromo), la pantalla de carga y la bienvenida.
+- Ilustraciones en los estados vacíos.
+- Animación de entrada del mini reproductor.
+
+### Cambiado
+- El ecualizador animado se queda quieto si el teléfono tiene "Quitar animaciones".
+- El texto respeta el tamaño de letra del sistema hasta 1,4×.
+- El progreso de la reproducción se actualiza cada 1 s, para gastar menos batería.
+
 ## [0.7.0] — Etapa 7: ajustes y personalización
 
 ### Añadido

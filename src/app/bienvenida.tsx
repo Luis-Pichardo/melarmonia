@@ -1,4 +1,4 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Redirect, router } from 'expo-router';
 import { useState } from 'react';
@@ -52,7 +52,12 @@ export default function BienvenidaScreen() {
       <SafeAreaView style={styles.safe}>
         <View style={styles.center}>
           <View style={styles.logo}>
-            <MaterialIcons name="music-note" size={72} color="#FFFFFF" />
+            <Image
+              source={require('@/assets/images/logo-mark.png')}
+              style={styles.logoImage}
+              contentFit="contain"
+              accessibilityLabel="Logo de Melarmonía"
+            />
           </View>
           <AppText variant="display" style={styles.white}>
             Melarmonía
@@ -110,6 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: spacing.md,
   },
+  logoImage: { width: 104, height: 104 },
   white: { color: '#FFFFFF', textAlign: 'center' },
   subtitle: { opacity: 0.85 },
   bottom: { gap: spacing.sm, paddingBottom: spacing.xl },

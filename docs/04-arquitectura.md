@@ -20,6 +20,7 @@
 | Ajustes | `react-native-mmkv` v4 (con `react-native-nitro-modules`) | Lectura instantánea al abrir la app |
 | Iconos | `@expo/vector-icons` (MaterialIcons) | Incluidos con Expo |
 | Degradados | `expo-linear-gradient` | Degradado de marca |
+| Color de la carátula | `expo-image-manipulator` + `pako` | Reduce la carátula a 32×32 en PNG y calcula su color medio en JavaScript (`src/player/png.ts`) |
 | Listas largas | `@shopify/flash-list` | Fluidez con miles de canciones |
 | Fuentes | `@expo-google-fonts/poppins`, `@expo-google-fonts/inter` | Tipografía de la guía de diseño |
 
@@ -96,11 +97,27 @@ Archivo: `src/player/player.ts`.
 - **Reanudar:** la cola, la canción, la posición, el aleatorio y la repetición se guardan cada 5 s, al pausar y al cambiar de canción. Al abrir la app se recuperan en pausa.
 - **Pantalla de bloqueo:** se activa con la primera reproducción y muestra título, artista, álbum y carátula, con los botones anterior y siguiente.
 - **Auriculares:** la pausa al desconectarlos la hace Android (`setHandleAudioBecomingNoisy`) y está siempre activa.
+- **Batería:** la lista nativa informa del progreso cada 1 s (`updateInterval: 1000`), suficiente para la barra y con menos trabajo en segundo plano.
+- **Color de fondo:** `src/player/artworkColor.ts` calcula el color medio de cada carátula una sola vez y lo guarda en MMKV (`artColor:<ruta>`).
 - **Cola (etapa 4):** *Reproducir a continuación* inserta detrás de la actual, *Añadir a la cola* añade al final, y también se puede quitar, mover o vaciar lo que queda. Cada cambio se aplica a la vez en el estado y en la lista nativa (`insert`, `add`, `remove`), sin cortar la canción que suena; por eso la canción actual no se puede mover ni quitar. Cada elemento de la cola tiene una clave propia, porque una canción puede estar dos veces. Con el aleatorio activo, los cambios también se aplican a la cola original.
 
 ### Búsqueda (etapa 6)
 
 Archivo: `src/library/search.ts`. Se crea en memoria un índice con el texto normalizado (sin tildes y en minúsculas) de cada canción, artista y álbum, y se vuelve a crear cuando cambia la biblioteca. Cada palabra buscada debe aparecer en el título, el artista o el álbum. El orden es: empieza por el texto → una palabra empieza por él → lo contiene → solo coincide el artista o el álbum. Con 8.000 canciones, cada búsqueda tarda menos de 1 ms.
+
+### Rendimiento (etapa 8)
+
+Pruebas con bibliotecas sintéticas (Node.js):
+
+| Operación | 5.000 canciones | 10.000 canciones |
+|---|---|---|
+| Ordenar por nombre | 13 ms | 25 ms |
+| Ordenar por artista | 5 ms | 11 ms |
+| Agrupar álbumes / artistas | 1 ms | 3 ms |
+| Índice A–Z | 14 ms | 29 ms |
+| Buscar | < 1 ms | < 1 ms |
+
+Todo se calcula solo cuando cambia la biblioteca (`useMemo`), y las listas usan FlashList, que solo dibuja las filas visibles.
 
 ## 4.5 Base de datos
 

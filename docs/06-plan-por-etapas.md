@@ -23,7 +23,7 @@ El proyecto se construye en **etapas independientes**. Cada etapa se empieza **s
 | 5 | Favoritos y listas | ✅ Completada |
 | 6 | Búsqueda | ✅ Completada |
 | 7 | Ajustes y personalización | ✅ Completada |
-| 8 | Pulido visual y rendimiento | ⏳ Pendiente |
+| 8 | Pulido visual y rendimiento | ✅ Completada |
 | 9 | Pruebas y lanzamiento 1.0 | ⏳ Pendiente |
 
 Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
@@ -208,17 +208,27 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 ---
 
-## Etapa 8 — Pulido visual y rendimiento
+## Etapa 8 — Pulido visual y rendimiento ✅
 
-- [ ] Animaciones y transiciones (200–300 ms)
-- [ ] Fondo del reproductor con un color tomado de la carátula
-- [ ] Icono final de la app (adaptable) y pantalla de carga final
-- [ ] Ilustraciones de los estados vacíos
-- [ ] Accesibilidad: descripciones para el lector de pantalla, contraste y tamaño de letra del sistema
-- [ ] Pruebas de rendimiento con más de 5.000 canciones
-- [ ] Revisión del consumo de batería en segundo plano
+- [x] Animaciones y transiciones (200–300 ms)
+- [x] Fondo del reproductor con un color tomado de la carátula
+- [x] Icono final de la app (adaptable) y pantalla de carga final
+- [x] Ilustraciones de los estados vacíos
+- [x] Accesibilidad: descripciones para el lector de pantalla, contraste y tamaño de letra del sistema
+- [x] Pruebas de rendimiento con más de 5.000 canciones
+- [x] Revisión del consumo de batería en segundo plano
 
 **Entregable y aceptación:** la app se ve terminada y funciona con fluidez en teléfonos de gama media.
+
+**Notas de la etapa:**
+- Fondo del reproductor con el color medio de la carátula (`expo-image-manipulator` + `pako`), guardado en caché.
+- Logo e icono final: una "m" de melodía con el eco de la armonía y una nota musical (elegido entre tres propuestas). Versión adaptable, monocroma, pantalla de carga y bienvenida.
+- Mini reproductor con animación de entrada; el ecualizador respeta "Quitar animaciones".
+- Estados vacíos con ilustración (halo, degradado de marca y notas).
+- Tamaño de letra del sistema respetado hasta 1,4×.
+- Rendimiento medido con 5.000 y 10.000 canciones (arquitectura, 4.4).
+- Batería: el progreso se informa cada 1 s en lugar de 0,5 s.
+- **Pendiente para la etapa 9:** medir en un teléfono real el consumo de batería y la fluidez.
 
 ---
 

@@ -142,22 +142,30 @@ Fuente: **Poppins** para títulos e **Inter** para el texto. Las dos son gratuit
 | **Menú inferior** | 4 pestañas: Biblioteca · Buscar · Listas · Ajustes. Pestaña activa en `accent`. |
 | **Hoja de opciones** | Panel que sube desde abajo, con bordes de 16, y opciones como "Añadir a lista", "Reproducir a continuación", "Ir al álbum"… |
 | **Avisos (toasts)** | Mensaje breve en la parte inferior durante 2,5 s. |
+| **Estado vacío** | Ilustración: halo con degradado suave, círculo con el degradado de marca y su icono, y dos notas decorativas en `accent`. Debajo, título, mensaje y botón opcional. |
 
 ## 2.7 Movimiento
 
 - Duración de las transiciones: 200–300 ms, con desaceleración suave.
 - El reproductor completo se abre deslizándose desde el mini reproductor y se cierra deslizando hacia abajo.
-- El fondo del reproductor completo toma un color suave extraído de la carátula, mezclado con el degradado de marca.
+- El fondo del reproductor completo toma el color medio de la carátula (saturación ≤ 60 %, luminosidad ≤ 28 % en oscuro y ≤ 34 % en claro, para que el texto blanco de arriba se lea), que pasa a `primaryDark` y termina en `background`. Sin carátula, empieza en `primaryDark`.
+- El mini reproductor aparece deslizándose desde abajo (250 ms).
+- Si el teléfono tiene activado **Quitar animaciones**, el ecualizador de la canción que suena queda quieto.
 
 ## 2.8 Accesibilidad
 
 - Contraste mínimo de 4.5:1 en el texto.
 - Todos los botones con descripción para lectores de pantalla ("Reproducir", "Siguiente canción"…).
-- La app respeta el tamaño de letra del sistema.
+- La app respeta el tamaño de letra del sistema, hasta 1,4 veces, para que las filas no se corten.
+- Las ilustraciones decorativas se ocultan al lector de pantalla.
 
 ## 2.9 Icono de la app
 
 - Fondo con el degradado de marca (`#4A2575` → `#6B3FA0`).
-- En el centro, una nota musical blanca (dos corcheas unidas) con una onda suave debajo: la melodía y la armonía.
-- La versión actual es **provisional** (etapa 1); el diseño final llega en la etapa 8.
+- **Logo:** una "m" blanca, la inicial de Melarmonía. Sus dos arcos son la **melodía**, el eco translúcido encima es la **armonía** y la última pata termina en una **nota musical**.
+- Proporciones (sobre una cuadrícula de 100): tres patas a x = 26, 50 y 74, de y = 46 a 72; arcos de radio 12; trazo de 7,5; eco de trazo 4 y 9 unidades más arriba, al 50 % de opacidad; cabeza de nota de 10 × 7,2, inclinada −23°.
+- Versiones: icono (degradado + logo), adaptable (logo al 68 %, dentro de la zona segura), monocromo, pantalla de carga y `logo-mark.png` (logo blanco con fondo transparente, que usa la bienvenida).
+- Icono adaptable de Android: fondo con el degradado y la figura dentro de la zona segura (66 % central). También hay versión monocroma, para los iconos temáticos de Android 13+.
+- Se genera con bordes suavizados (dibujado a 4× y reducido). Archivos en `assets/images/`.
+- Sobre fondo blanco, el logo se usa en `primary`.
 - Formato de icono adaptable de Android (fondo y figura por separado).

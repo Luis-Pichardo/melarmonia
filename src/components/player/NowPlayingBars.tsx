@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
+  useReducedMotion,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
@@ -50,9 +51,14 @@ function Bar({
   peak: number;
 }) {
   const scale = useSharedValue(0.35);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (playing) {
+    // Con "Quitar animaciones" activado en Android, las barras quedan quietas.
+    if (playing && reduceMotion) {
+      cancelAnimation(scale);
+      scale.value = peak * 0.8;
+    } else if (playing) {
       scale.value = withDelay(
         delay,
         withRepeat(
@@ -68,7 +74,7 @@ function Bar({
       scale.value = withTiming(0.35, { duration: 200 });
     }
     return () => cancelAnimation(scale);
-  }, [playing, delay, peak, scale]);
+  }, [playing, delay, peak, scale, reduceMotion]);
 
   const style = useAnimatedStyle(() => ({ transform: [{ scaleY: scale.value }] }));
 
