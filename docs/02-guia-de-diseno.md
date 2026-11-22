@@ -162,7 +162,10 @@ Fuente: **Poppins** para títulos e **Inter** para el texto. Las dos son gratuit
 ## 2.9 Icono de la app
 
 - Fondo con el degradado de marca (`#4A2575` → `#6B3FA0`).
-- En el centro, dos corcheas unidas en blanco y, debajo, dos ondas: una blanca (la **melodía**) y otra translúcida y desfasada (la **armonía**).
+- **Logo:** una "m" blanca, la inicial de Melarmonía. Sus dos arcos son la **melodía**, el eco translúcido encima es la **armonía** y la última pata termina en una **nota musical**.
+- Proporciones (sobre una cuadrícula de 100): tres patas a x = 26, 50 y 74, de y = 46 a 72; arcos de radio 12; trazo de 7,5; eco de trazo 4 y 9 unidades más arriba, al 50 % de opacidad; cabeza de nota de 10 × 7,2, inclinada −23°.
+- Versiones: icono (degradado + logo), adaptable (logo al 68 %, dentro de la zona segura), monocromo, pantalla de carga y `logo-mark.png` (logo blanco con fondo transparente, que usa la bienvenida).
 - Icono adaptable de Android: fondo con el degradado y la figura dentro de la zona segura (66 % central). También hay versión monocroma, para los iconos temáticos de Android 13+.
 - Se genera con bordes suavizados (dibujado a 4× y reducido). Archivos en `assets/images/`.
+- Sobre fondo blanco, el logo se usa en `primary`.
 - Formato de icono adaptable de Android (fondo y figura por separado).

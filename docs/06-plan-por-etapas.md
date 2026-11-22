@@ -222,7 +222,7 @@ Estados: ⏳ Pendiente · 🚧 En curso · 👀 En revisión · ✅ Completada
 
 **Notas de la etapa:**
 - Fondo del reproductor con el color medio de la carátula (`expo-image-manipulator` + `pako`), guardado en caché.
-- Icono final: corcheas y dos ondas (melodía y armonía), con bordes suavizados, versión adaptable y monocroma.
+- Logo e icono final: una "m" de melodía con el eco de la armonía y una nota musical (elegido entre tres propuestas). Versión adaptable, monocroma, pantalla de carga y bienvenida.
 - Mini reproductor con animación de entrada; el ecualizador respeta "Quitar animaciones".
 - Estados vacíos con ilustración (halo, degradado de marca y notas).
 - Tamaño de letra del sistema respetado hasta 1,4×.

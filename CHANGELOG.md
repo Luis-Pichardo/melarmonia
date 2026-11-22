@@ -9,7 +9,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ### Añadido
 - El fondo del reproductor toma el color de la carátula.
-- Icono final de la app (adaptable y monocromo) y pantalla de carga con la nueva figura.
+- Logo de Melarmonía: una "m" hecha de la melodía, con el eco de la armonía y una nota musical. Se usa en el icono (adaptable y monocromo), la pantalla de carga y la bienvenida.
 - Ilustraciones en los estados vacíos.
 - Animación de entrada del mini reproductor.
 
